@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_bloco1",
+  "%Name":"obj_blocoL",
   "eventList":[],
   "managed":true,
-  "name":"obj_bloco1",
+  "name":"obj_blocoL",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -27,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_bloco1",
-    "path":"sprites/spr_bloco1/spr_bloco1.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
