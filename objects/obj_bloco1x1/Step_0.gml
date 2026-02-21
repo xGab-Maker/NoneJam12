@@ -1,1 +1,1 @@
-depth = -y;
+colisoes();
