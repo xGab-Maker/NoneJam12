@@ -11,7 +11,7 @@ cria_bloco = function(_ind, _cor, _bloco) constructor
     bloco = _bloco;
 }
 
-bloco1 = new cria_bloco(1, c_white, []);
+bloco1 = new cria_bloco(1, c_purple, []);
 
 bloco_grandao = new cria_bloco(9, c_orange, [[1, "hori"], [1, "hori"]]);
 

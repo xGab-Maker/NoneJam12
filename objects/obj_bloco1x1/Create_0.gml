@@ -239,7 +239,7 @@ aumenta_scale = function()
                 }
             }
         }else{
-            if (conjunto[_find-1].xscale >= .8 and conjunto[_find-1].yscale >= .8){
+            if (conjunto[_find-1].xscale >= .7 and conjunto[_find-1].yscale >= .7){
                 if (shake == false){
                     screen_shake(1);
                     
@@ -315,7 +315,7 @@ estado_morre = function()
 {
     dim_morre();
     
-    if (yscale <= .05){
+    if (yscale <= .1){
         var _find = array_get_index(conjunto, id);
         
         if (array_length(conjunto) > 0 and _find < array_length(conjunto)-1){
