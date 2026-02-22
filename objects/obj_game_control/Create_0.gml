@@ -36,13 +36,13 @@ todos_blocos = [bloco1, bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, 
 #endregion
 
 
-inix = 100;
+inix = 180;
 iniy = 100;
 
 width_block = sprite_get_width(spr_bloco1x1);
 height_block = sprite_get_height(spr_bloco1x1);
 
-width  = 14;
+width  = 12;
 height = 7;
 
 if (!variable_global_exists("mapa")){

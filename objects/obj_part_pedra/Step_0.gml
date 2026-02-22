@@ -1,6 +1,6 @@
 image_alpha -= .01;
 
-if (image_alpha <= 0){
+if (image_alpha <= .01){
     instance_destroy(self);
 }
 
