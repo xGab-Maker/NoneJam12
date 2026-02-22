@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_utilidades_gerais",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_utilidades_gerais",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Efeitos_Gerais/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

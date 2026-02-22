@@ -30,17 +30,17 @@ bloco_l2 = new cria_bloco(8, c_fuchsia, [[-1, "vert"], [-1, "hori"], [-1, "hori"
 bloco_l3 = new cria_bloco(9, c_green, [[1, "hori"], [1, "vert"], [1, "vert"]]);
 bloco_l4 = new cria_bloco(1, c_maroon, [[1, "vert"], [1, "hori"], [1, "hori"]]);
 
-todos_blocos = [bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, bloco_l1, bloco_l2, bloco_l3, bloco_l4, bloco_curva1, bloco_curva2, 
+todos_blocos = [bloco1, bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, bloco_l1, bloco_l2, bloco_l3, bloco_l4, bloco_curva1, bloco_curva2, 
                 bloco_curva3, bloco_curva4, bloco_grandao];
 
 #endregion
 
 
-inix = 200;
-iniy = 200;
+inix = 100;
+iniy = 100;
 
-width_block = 32;
-height_block = 32;
+width_block = sprite_get_width(spr_bloco1x1);
+height_block = sprite_get_height(spr_bloco1x1);
 
 width  = 14;
 height = 7;
@@ -145,10 +145,19 @@ checa_livres = function()
                 _block.image_blend = _spawn.cor;
                 
                 array_push(_all_blocks, _block.id);
+                _block.cord = [_return[i][0], _return[i][1]];
             }
             
             for (var i = 0; i < array_length(_all_blocks); i++) {
             	_all_blocks[i].conjunto = _all_blocks;
+            }
+            
+            var _pega1 = irandom(array_length(_all_blocks)-1);
+            
+            for (var i = 0; i < array_length(_all_blocks); i++) {
+            	if (i == _pega1){
+                    _all_blocks[i].predio = spr_predios_1;
+                }
             }
             
             break;

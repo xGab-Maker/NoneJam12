@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_multi_color",
+  "name":"sh_multi_color",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Efeitos_Gerais/Shaders.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}
