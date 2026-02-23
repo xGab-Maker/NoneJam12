@@ -12,3 +12,7 @@ if (mouse_check_button_pressed(mb_right)){
     _ball.vspd = -6;
     _ball.hspd = random_range(-1, 1);
 }
+
+if (keyboard_check_pressed(vk_escape)){
+    game_restart();
+}
