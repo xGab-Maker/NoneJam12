@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Blocos",
-    "path":"folders/Sprites/Blocos.yy",
+    "name":"Predios",
+    "path":"folders/Sprites/Blocos/Predios.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

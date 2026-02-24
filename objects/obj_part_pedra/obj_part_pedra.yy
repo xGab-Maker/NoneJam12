@@ -10,8 +10,8 @@
   "name":"obj_part_pedra",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Parts",
+    "path":"folders/Objects/Parts.yy",
   },
   "parentObjectId":null,
   "persistent":false,

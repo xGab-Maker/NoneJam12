@@ -1,5 +1,5 @@
 if (alpha_dano > 0){
-    var _quebra = 3;
+    var _quebra = 5;
     
     var _dim = 0;
     var _addy = 0;

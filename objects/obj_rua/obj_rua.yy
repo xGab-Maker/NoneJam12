@@ -9,8 +9,8 @@
   "name":"obj_rua",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Outros",
+    "path":"folders/Objects/Blocos/Outros.yy",
   },
   "parentObjectId":null,
   "persistent":false,

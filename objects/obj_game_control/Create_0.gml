@@ -61,14 +61,19 @@ bloco_2x1 = new cria_bloco(9, #4e584a, [[1, "vert"], [1, "vert"], [1, "vert"]]);
 
 //T (todas as variacoes)
 
-//2x2
+//2x2 (4 dirs)
+bloco_2x2_1 = new cria_bloco(9, #873e84, [[1, "hori"], [1, "vert"], [-1, "hori"]]);
+bloco_2x2_2 = new cria_bloco(9, #873e84, [[1, "vert"], [-1, "hori"], [-1, "vert"]]);
+bloco_2x2_3 = new cria_bloco(9, #873e84, [[-1, "hori"], [-1, "vert"], [1, "hori"]]);
+bloco_2x2_4 = new cria_bloco(9, #873e84, [[-1, "vert"], [1, "hori"], [1, "vert"]]);
+
 
 //Z (todas as variacoes)
 
 //1x4
 
 todos_blocos = [bloco1, bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, bloco_l1, bloco_l2, bloco_l3, bloco_l4, bloco_curva1, bloco_curva2, 
-                bloco_curva3, bloco_curva4, bloco_grandao, bloco_1x3, bloco_3x1, bloco_2x1];
+                bloco_curva3, bloco_curva4, bloco_grandao, bloco_1x3, bloco_3x1, bloco_2x1, bloco_2x2_1, bloco_2x2_2, bloco_2x2_3, bloco_2x2_4];
 
 #endregion
 

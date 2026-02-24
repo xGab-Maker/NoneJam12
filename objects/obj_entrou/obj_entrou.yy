@@ -6,8 +6,8 @@
   "name":"obj_entrou",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Colisoes",
+    "path":"folders/Objects/Colisoes.yy",
   },
   "parentObjectId":null,
   "persistent":false,

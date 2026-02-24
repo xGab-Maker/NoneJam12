@@ -49,14 +49,26 @@ tipo = 0;
 
 cooldown_dano = game_get_speed(gamespeed_fps)*.1;
 
+vida_predio = noone;
+
 cria_vida = function()
 {
-    var _vida = instance_create_depth(x, y-sprite_height*1.5, -9999, obj_mostra_vida);
+    var _segue = true;
     
-    _vida.vida = vida;
+    for (var i = 0; i < array_length(conjunto); i++) {
+    	if (conjunto[i].vida_predio != noone){
+            _segue = false;
+        }
+    }
     
-    if (instance_exists(conjunto[0])){
-        _vida.vida_perd = conjunto[0].vida_perdida;
+    if (vida_predio == noone and _segue){
+        vida_predio = instance_create_depth(x, y-sprite_height/2, -9999, obj_mostra_vida);
+        
+        vida_predio.vida = vida;
+        
+        if (instance_exists(conjunto[0])){
+            vida_predio.vida_perd = conjunto[0].vida_perdida;
+        }
     }
 }
 
@@ -297,6 +309,14 @@ estado_transicao = function() {auto_tile();}
 
 estado_morre = function()
 {
+    if (vida_predio != noone){
+        if (vida_predio.estado != vida_predio.estado_morre){
+            vida_predio.vspd = -.5;
+        }
+        
+        vida_predio.estado = vida_predio.estado_morre;
+    }
+    
     dim_morre();
     
     if (yscale <= .1){
@@ -311,8 +331,6 @@ estado_morre = function()
                 conjunto[ind_destroy].ind_destroy = ind_destroy;
             }
         }
-        
-        
         
         instance_destroy(self);
     }

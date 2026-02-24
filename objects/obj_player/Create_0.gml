@@ -1,15 +1,17 @@
 indicex = 2;
 indicey = array_length(global.mapa)-1;
 
-instance_create_depth(x, y, depth, obj_seta);
+var _seta = instance_create_depth(x, y, depth, obj_seta);
+
+_seta.pai = id;
 
 left  = noone;
 right = noone;
 
 sobe = false;
 
-margemx = sprite_width-7;
-margemy = sprite_height+8;
+margemx = sprite_width+2;
+margemy = sprite_height+16;
 
 inix = 100+margemx;
 iniy = 100+margemy;
@@ -29,12 +31,16 @@ nyscale = 1;
 angle   = 0;
 nangle  = 0;
 
-cooldown_atira = 0;
+lado = 0;
 
 inputs = function()
 {
     left = keyboard_check(ord("A"));
     right = keyboard_check(ord("D"));
+}
+
+if (indicey == array_length(global.mapa)-1){
+    lado = "Norm";
 }
 
 move = function()
@@ -52,10 +58,24 @@ move = function()
         }else{
             indicey += (_add/8)*ladoy;
             
-            nyscale = 1.2;
-            nxscale = .8;
+            var _segue = true;
+            
+            if (lado == "c" and _add == 1) _segue = false;
+            if (lado == "d" and _add == -1) _segue = false;
+                
+            if (_segue){
+                nyscale = 1.2;
+                nxscale = .8;
+            }else{
+                nyscale = 1;
+                nxscale = 1;
+            }
             
             nangle = 0;
+        }
+        
+        if (indicey == array_length(global.mapa)-1){
+            lado = "Norm";
         }
         
         if (indicex == 0 and indicey == array_length(global.mapa)-1){
@@ -77,7 +97,7 @@ move = function()
                 break;
             }
             
-            show_debug_message("a");
+            lado = "a"
         }
         
         if (indicex == array_length(global.mapa[0])-1 and indicey == array_length(global.mapa)-1){
@@ -97,7 +117,7 @@ move = function()
                 break;
             }
             
-            show_debug_message("b");
+            lado = "b"
         }
         
         if (indicex == array_length(global.mapa[0])-1 and indicey == 0){
@@ -110,29 +130,13 @@ move = function()
                 
                     //margem_multiy = 1;
                 break;
-                
-            	case 1:
-                    sobe = false;
-                    
-                    ladoy = 1;
-                    ladox = -1;
-                break;
             }
             
-            show_debug_message("c");
+            lado = "c";
         }
         
         if (indicex == 0 and indicey == 0){
             switch (_add) {
-            	case -1:
-                    sobe = false;
-                    
-                    ladoy = 1;
-                    ladox = -1;
-                
-                    //margem_multiy = -1;
-                break;
-                
             	case 1:
                     sobe = true;
                     
@@ -143,7 +147,7 @@ move = function()
                 break;
             }
             
-            show_debug_message("d");
+            lado = "d";
         }
         
         indicex = clamp(indicex, 0, array_length(global.mapa[0])-1);
@@ -154,50 +158,4 @@ move = function()
         nyscale = 1;
         nxscale = 1;
     }
-}
-
-atira = function()
-{
-    var _dir = 0;
-    
-    var _randx = 0;
-    var _randy = 0;
-    
-    var _mousedir = point_direction(x, y, mouse_x, mouse_y);
-    
-    switch (sobe) {
-    	case true: 
-            switch (ladoy) {
-            	case 1: _dir = 0 break;
-            	case -1: 
-                    _dir = 180
-                    _mousedir = -_mousedir;
-                break;
-            }
-        
-            _randy = random_range(-5, 5);
-        
-            xscale = .9;
-            yscale = 1.2;
-        break;
-        
-        case false:
-            switch (ladox) {
-            	case 1: _dir = 90 break;
-            	case -1: _dir = -90 break;
-            }
-        
-            _randx = random_range(-5, 5);
-        
-            xscale = 1.2;
-            yscale = .9;
-        break;
-    }
-    
-    var _spd = 5;
-    
-    var _tiro = instance_create_layer(x, y, "Tiros", obj_bola);
-    
-    _tiro.hspd = lengthdir_x(_spd, _mousedir+_randx);
-    _tiro.vspd = lengthdir_y(_spd, _mousedir+_randy);
 }

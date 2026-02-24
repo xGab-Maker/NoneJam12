@@ -12,8 +12,8 @@
   "name":"obj_bloco1x1",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Predios",
+    "path":"folders/Objects/Blocos/Predios.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -10,8 +10,8 @@
   "name":"obj_mostra_vida",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Passivas",
+    "path":"folders/Objects/Passivas.yy",
   },
   "parentObjectId":null,
   "persistent":false,
