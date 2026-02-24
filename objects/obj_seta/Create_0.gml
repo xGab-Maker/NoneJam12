@@ -5,6 +5,9 @@ paiy = 0;
 
 cooldown_atira = 0;
 
+xscale = 1;
+yscale = 1;
+
 atira = function(_direction, _qnt)
 {
     var _randx = 0;
@@ -21,4 +24,14 @@ atira = function(_direction, _qnt)
     
     _tiro.xscale = .5;
     _tiro.yscale = .5;
+    
+    xscale = 1.2;
+    yscale = .6;
+    
+    if (instance_exists(pai)){
+        with (pai) {
+        	xscale = 1.3;
+        	yscale = .9;
+        }
+    }
 }

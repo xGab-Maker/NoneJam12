@@ -302,6 +302,8 @@ estado_parado = function()
         if (instance_exists(conjunto[ind_destroy])){
             conjunto[ind_destroy].estados = conjunto[ind_destroy].estado_morre;
         }
+        
+        screen_shake(5);
     }
 }
 

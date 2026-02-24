@@ -1,7 +1,10 @@
 {
   "$GMObject":"",
   "%Name":"obj_arv_grande",
-  "eventList":[],
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
   "name":"obj_arv_grande",
   "overriddenProperties":[],
@@ -9,7 +12,10 @@
     "name":"Outros",
     "path":"folders/Objects/Blocos/Outros.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_bloco1x1",
+    "path":"objects/obj_bloco1x1/obj_bloco1x1.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -27,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_arv_grandes",
+    "path":"sprites/spr_arv_grandes/spr_arv_grandes.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

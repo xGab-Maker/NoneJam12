@@ -11,20 +11,30 @@ cria_bloco = function(_ind, _cor, _bloco) constructor
     bloco = _bloco;
 }
 
+arv_g0  = new cria_bloco(9, c_white, []);
+arv_g1  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+arv_g2  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"]]);
+arv_g3  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+arv_g4  = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
+arv_g5  = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"]]);
+arv_g6  = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g7  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
+arv_g8  = new cria_bloco(9, c_white, [[1, "vert"], [-1, "hori"], [-1, "hori"]]);
+arv_g9  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
+arv_g10 = new cria_bloco(9, c_white, [[-1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g11 = new cria_bloco(9, c_white, [[-1, "vert"], [-1, "hori"], [-1, "hori"]]);
+arv_g12 = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g13 = new cria_bloco(9, c_white, [[1, "vert"], [1, "hori"], [1, "hori"]]);
+
+array_arvs = [arv_g0, arv_g1, arv_g2, arv_g3, arv_g4, arv_g5, arv_g6, arv_g7, arv_g8, arv_g9, arv_g10, arv_g11, arv_g12, arv_g13];
+
 rua1 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
 rua2 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"]]);
 rua3 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
 rua4 = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
 rua5 = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"]]);
 
-//rua3  = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
-//rua4  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
-//rua5  = new cria_bloco(9, c_white, [[1, "vert"], [-1, "hori"], [-1, "hori"]]);
-//rua6  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
-//rua7  = new cria_bloco(9, c_white, [[-1, "hori"], [1, "vert"], [1, "vert"]]);
-//rua8  = new cria_bloco(9, c_white, [[-1, "vert"], [-1, "hori"], [-1, "hori"]]);
-//rua9  = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
-//rua10 = new cria_bloco(9, c_white, [[1, "vert"], [1, "hori"], [1, "hori"]]);
+
 
 array_ruas = [rua1, rua2, rua3, rua4, rua5];
 

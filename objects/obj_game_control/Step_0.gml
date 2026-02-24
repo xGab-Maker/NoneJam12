@@ -2,6 +2,8 @@ if (keyboard_check_pressed(ord("Y"))){
     repeat (2) {
     	checa_livres();
     }
+    
+    checa_livres(array_arvs, obj_arv_grande);
 }
 
 global.blocos_qnt = instance_number(obj_bloco1x1);

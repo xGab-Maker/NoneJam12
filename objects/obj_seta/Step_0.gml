@@ -4,7 +4,7 @@ var _dir = point_direction(paix, paiy, mouse_x, mouse_y);
 
 var _qnt = 20;
 
-if (pai != noone){
+if (instance_exists(pai)){
     //45 a 135
     switch (pai.lado) {
     	case "Norm": 
@@ -31,6 +31,14 @@ if (pai != noone){
             }
         break;
         case "d":
+            if (_dir >= 45 and _dir < 180){
+                _dir = 45;
+            }
+        
+            if (_dir <= 315 and _dir > 180){
+                _dir = 315;
+            }
+        break;
     }
 }
 
@@ -49,3 +57,6 @@ if (mouse_check_button(mb_left)){
         cooldown_atira = game_get_speed(gamespeed_fps)*.4;
     }
 }
+
+xscale = elastic("xs", xscale, 1);
+yscale = elastic("ys", yscale, 1);

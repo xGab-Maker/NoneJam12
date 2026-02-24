@@ -1,3 +1,5 @@
+screen_shake(1);
+
 hspd = 0;
 vspd = 0;
 

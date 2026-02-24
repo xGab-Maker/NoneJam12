@@ -2,12 +2,14 @@ conjunto = [];
 cord     = [];
 tipo     = noone;
 
-auto_tile = function()
+rodou = false;
+
+auto_tile = function(_obj)
 {
     var _add = 32;
     var _mask = 0
     
-    var _quem = obj_rua;
+    var _quem = _obj;
     
     var _instlef = instance_place(x-_add, y, _quem);
     var _instrig = instance_place(x+_add, y, _quem);
