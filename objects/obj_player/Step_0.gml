@@ -9,8 +9,8 @@ inix = 95+margemy*margem_multix;
 x = lerp(x, inix+indicex*margemx, .15);
 y = lerp(y, iniy+indicey*margemy, .15);
 
-xscale = lerp(xscale, nxscale, .15);
-yscale = lerp(yscale, nyscale, .15);
+xscale = elastic("xs", xscale, nxscale, , .3);
+yscale = elastic("ys", yscale, nyscale, , .3);
 
 angle = lerp(angle, nangle, .15);
 

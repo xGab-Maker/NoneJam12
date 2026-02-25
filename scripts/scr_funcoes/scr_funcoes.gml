@@ -1,4 +1,3 @@
-global.blocos_qnt = 0;
 
 function cria_particula(_sprite, _x, _y, _depth, _pedra = false, _tipo = noone)
 {
@@ -69,4 +68,31 @@ function pega_numb(_analyse)
     }
     
     return _num;    
+}
+
+function add_prog(_porc)
+{
+    var _add = _porc/100;
+    
+    global.progressao += _add;
+    
+    if (instance_exists(obj_ui_general)){
+        var _analise = 1;
+        
+        if (_add > 0){
+            _analise = 1;
+        }else{
+            _analise = -1;
+        }
+        
+        with (obj_ui_general) {
+        	if (_analise > 1){
+                bar_prog.xs = 1.1;
+                bar_prog.ys = .9;
+            }else{
+                bar_prog.xs = .9;
+                bar_prog.ys = 1.1;
+            }
+        }
+    }
 }

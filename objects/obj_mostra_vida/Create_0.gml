@@ -1,5 +1,7 @@
 estado = noone;
 
+pai = noone;
+
 alpha_dano = 1;
 
 vida = 0;
@@ -9,6 +11,9 @@ xscale_dano = 1.5;
 yscale_dano = .6;
 
 vspd = -.2;
+
+cooldown_some_pad = game_get_speed(gamespeed_fps)*2;
+cooldown_some     = cooldown_some_pad;
 
 estado_parado = function()
 {

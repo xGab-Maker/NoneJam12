@@ -8,6 +8,8 @@ cooldown_atira = 0;
 xscale = 1;
 yscale = 1;
 
+qnt = 20;
+
 atira = function(_direction, _qnt)
 {
     var _randx = 0;
@@ -30,8 +32,16 @@ atira = function(_direction, _qnt)
     
     if (instance_exists(pai)){
         with (pai) {
-        	xscale = 1.3;
-        	yscale = .9;
+            if (lado == "b" or lado == "c" or lado == "a" or lado == "d"){
+                xscale = .9;
+        	    yscale = 1.3;
+            }else{
+                xscale = 1.3;
+        	    yscale = .9;
+            }
+
         }
     }
+    
+    qnt = 10;
 }

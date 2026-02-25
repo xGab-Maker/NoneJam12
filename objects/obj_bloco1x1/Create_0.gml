@@ -18,7 +18,7 @@ vida_perdida = 0;
 roda = 0;
 
 predio     = noone;
-num_predio = irandom(sprite_get_number(spr_predios_1)-1);
+num_predio = irandom(sprite_get_number(predio)-1);
 
 xscale = .5;
 yscale = 0;
@@ -69,6 +69,8 @@ cria_vida = function()
         if (instance_exists(conjunto[0])){
             vida_predio.vida_perd = conjunto[0].vida_perdida;
         }
+        
+        vida_predio.pai = id;
     }
 }
 
@@ -298,6 +300,8 @@ estado_parado = function()
                 conjunto[i].estados = conjunto[i].estado_transicao;
             }
         }
+        
+        add_prog(7);
         
         if (instance_exists(conjunto[ind_destroy])){
             conjunto[ind_destroy].estados = conjunto[ind_destroy].estado_morre;

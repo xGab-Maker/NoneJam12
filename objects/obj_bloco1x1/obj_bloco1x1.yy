@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_bloco1x1",
-    "path":"sprites/spr_bloco1x1/spr_bloco1x1.yy",
+    "name":"spr_predio_rosa",
+    "path":"sprites/spr_predio_rosa/spr_predio_rosa.yy",
   },
   "spriteMaskId":null,
   "visible":true,

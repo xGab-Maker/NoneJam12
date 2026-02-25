@@ -77,13 +77,17 @@ bloco_2x2_2 = new cria_bloco(9, #873e84, [[1, "vert"], [-1, "hori"], [-1, "vert"
 bloco_2x2_3 = new cria_bloco(9, #873e84, [[-1, "hori"], [-1, "vert"], [1, "hori"]]);
 bloco_2x2_4 = new cria_bloco(9, #873e84, [[-1, "vert"], [1, "hori"], [1, "vert"]]);
 
-
 //Z (todas as variacoes)
+blocoz1 = new cria_bloco(8, c_white, [[-1, "vert"], [1, "hori"], [-1, "vert"]]);
+blocoz2 = new cria_bloco(8, c_white, [[-1, "vert"], [-1, "hori"], [-1, "vert"]]);
+blocoz3 = new cria_bloco(8, c_white, [[1, "hori"], [1, "vert"], [1, "hori"]]);
+blocoz4 = new cria_bloco(8, c_white, [[-1, "hori"], [1, "vert"], [-1, "hori"]]);
 
 //1x4
 
 todos_blocos = [bloco1, bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, bloco_l1, bloco_l2, bloco_l3, bloco_l4, bloco_curva1, bloco_curva2, 
-                bloco_curva3, bloco_curva4, bloco_grandao, bloco_1x3, bloco_3x1, bloco_2x1, bloco_2x2_1, bloco_2x2_2, bloco_2x2_3, bloco_2x2_4];
+                bloco_curva3, bloco_curva4, bloco_grandao, bloco_1x3, bloco_3x1, bloco_2x1, bloco_2x2_1, bloco_2x2_2, bloco_2x2_3, bloco_2x2_4, 
+                blocoz1, blocoz2, blocoz3, blocoz4];
 
 #endregion
 
@@ -91,8 +95,8 @@ todos_blocos = [bloco1, bloco_inv_l1, bloco_inv_l2, bloco_inv_l3, bloco_inv_l4, 
 inix = 208;
 iniy = 96;
 
-width_block = sprite_get_width(spr_bloco1x1);
-height_block = sprite_get_height(spr_bloco1x1);
+width_block = 32;
+height_block = 32;
 
 width  = 12;
 height = 7;
@@ -196,6 +200,9 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
             }
             
             var _all_blocks = [];
+
+            var _spr = choose(spr_predio_azul, spr_predio_bege, spr_predio_cinza, spr_predio_cyan, spr_predio_laranja,
+                              spr_predio_rosa, spr_predio_roxo);
             
             for (var i = 0; i < array_length(_return); i++) { 
                 var _addx = _return[i][0]*width_block;
@@ -206,7 +213,7 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
                 if (_blocks == todos_blocos){
                     _block = instance_create_layer(inix+_addx, iniy+_addy, "Instances", _obj);
                     
-                    _block.sprite_index = spr_bloco1x1;
+                    _block.sprite_index = _spr;
                     _block.image_blend = _spawn.cor;
                 }else{
                     _block = instance_create_layer(inix+_addx, iniy+_addy, "Instances", _obj);
@@ -228,7 +235,12 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
                 
                 for (var i = 0; i < array_length(_all_blocks); i++) {
                 	if (i == _pega1){
-                        _all_blocks[i].predio = spr_predios_1;
+                        switch (_all_blocks[i].sprite_index) {
+                            case spr_predio_azul   : _all_blocks[i].predio = spr_cima_predio_azu break;
+                            case spr_predio_rosa   : _all_blocks[i].predio = spr_cima_predio_ros break;
+                            case spr_predio_laranja: _all_blocks[i].predio = spr_cima_predio_lan break;
+                            case spr_predio_cyan   : _all_blocks[i].predio = spr_cima_predio_cya break;
+                        }                                                   
                     }
                 }
             }

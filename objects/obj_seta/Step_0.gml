@@ -2,8 +2,6 @@ depth = -y;
 
 var _dir = point_direction(paix, paiy, mouse_x, mouse_y);
 
-var _qnt = 20;
-
 if (instance_exists(pai)){
     //45 a 135
     switch (pai.lado) {
@@ -42,8 +40,8 @@ if (instance_exists(pai)){
     }
 }
 
-x = lerp(x, paix+lengthdir_x(_qnt, _dir), .5);
-y = lerp(y, paiy+lengthdir_y(_qnt, _dir), .5);
+x = lerp(x, paix+lengthdir_x(qnt, _dir), .4);
+y = lerp(y, paiy+lengthdir_y(qnt, _dir), .4);
 
 image_angle = _dir+90;
 
@@ -52,7 +50,7 @@ cooldown_atira = clamp(cooldown_atira, 0, infinity);
 
 if (mouse_check_button(mb_left)){
     if (cooldown_atira <= 0){
-        atira(_dir, _qnt);
+        atira(_dir, qnt);
         
         cooldown_atira = game_get_speed(gamespeed_fps)*.4;
     }
@@ -60,3 +58,5 @@ if (mouse_check_button(mb_left)){
 
 xscale = elastic("xs", xscale, 1);
 yscale = elastic("ys", yscale, 1);
+
+qnt = lerp(qnt, 20, .15);

@@ -90,8 +90,8 @@ colide_invert = function()
                 }
             }
             
-            xscale = 1.5;
-            yscale = .6;
+            xscale = 1.3;
+            yscale = .8;
             
             colidi++;
         }
