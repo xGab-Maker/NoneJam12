@@ -6,6 +6,8 @@ depth = -y;
 
 image_alpha = 1;
 
+arvore = false;
+
 estados = noone;
 
 cria_part = true;
@@ -50,6 +52,8 @@ tipo = 0;
 cooldown_dano = game_get_speed(gamespeed_fps)*.1;
 
 vida_predio = noone;
+
+rodou = false;
 
 cria_vida = function()
 {
@@ -118,28 +122,28 @@ auto_tile = function()
     //Sistema de bit mask
     //Uso potencias de dois para evitar numeros iguais na hora da checagem
     if (_instlef){
-        if (_instlef.image_blend == image_blend and _instlef.tipo == tipo){
+        if (_instlef.image_blend == image_blend and _instlef.tipo == tipo and _instlef.arvore == arvore){
             _mask += 8;
             
             checa_pusha(_instlef);
         }
     }
     if (_instrig){
-        if (_instrig.image_blend == image_blend and _instrig.tipo == tipo){
+        if (_instrig.image_blend == image_blend and _instrig.tipo == tipo and _instrig.arvore == arvore){
             _mask += 16;
             
             checa_pusha(_instrig);
         }
     }
     if (_instup){
-        if (_instup.image_blend == image_blend and _instup.tipo == tipo){
+        if (_instup.image_blend == image_blend and _instup.tipo == tipo and _instup.arvore == arvore){
             _mask += 2;
             
             checa_pusha(_instup);
         } 
     }
     if (_instdow){
-        if (_instdow.image_blend == image_blend and _instdow.tipo == tipo){
+        if (_instdow.image_blend == image_blend and _instdow.tipo == tipo and _instdow.arvore == arvore){
             _mask += 64;
             
             checa_pusha(_instdow);
@@ -149,28 +153,28 @@ auto_tile = function()
     //Sistema de bit mask
     //Uso potencias de dois para evitar numeros iguais na hora da checagem
     if (_instlefup and _instlef and _instup){
-        if (_instlefup.image_blend == image_blend and _instlef.image_blend == image_blend and _instup.image_blend == image_blend and _instlefup.tipo == tipo) {
+        if (_instlefup.image_blend == image_blend and _instlef.image_blend == image_blend and _instup.image_blend == image_blend and _instlefup.tipo == tipo and _instlefup.arvore == arvore) {
             _mask += 1;
             
             //checa_pusha(_instlefup);
         }
     }
     if (_instlefdow and _instdow and _instlef){
-        if (_instlefdow.image_blend == image_blend and _instdow.image_blend == image_blend and _instlef.image_blend == image_blend and _instlefdow.tipo == tipo){
+        if (_instlefdow.image_blend == image_blend and _instdow.image_blend == image_blend and _instlef.image_blend == image_blend and _instlefdow.tipo == tipo and _instlefdow.arvore == arvore){
             _mask += 32;
             
             //checa_pusha(_instlefdow);
         }
     }
     if (_instrighup and _instup and _instrig){
-        if (_instrighup.image_blend == image_blend and _instup.image_blend == image_blend and _instrig.image_blend == image_blend and _instrighup.tipo == tipo){
+        if (_instrighup.image_blend == image_blend and _instup.image_blend == image_blend and _instrig.image_blend == image_blend and _instrighup.tipo == tipo and _instrighup.arvore == arvore){
             _mask += 4;
             
             //checa_pusha(_instrighup);
         }
     }
     if (_instrighdow and _instdow and _instrig){
-        if (_instrighdow.image_blend == image_blend and _instdow.image_blend == image_blend and _instrig.image_blend == image_blend and _instrighdow.tipo == tipo){
+        if (_instrighdow.image_blend == image_blend and _instdow.image_blend == image_blend and _instrig.image_blend == image_blend and _instrighdow.tipo == tipo and _instrighdow.arvore == arvore){
             _mask += 128;
             
             //checa_pusha(_instrighdow);
@@ -181,8 +185,6 @@ auto_tile = function()
     
     image_index = _ret;
 }
-
-auto_tile();
 
 checa_todos_scales = function()
 {

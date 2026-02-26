@@ -1,5 +1,11 @@
 depth = -y;
 
+if (!rodou){
+    auto_tile();
+    
+    rodou = true;
+}
+
 if (instance_exists(conjunto[0])){
     vida_perdida = conjunto[0].vida_perdida;
 }
