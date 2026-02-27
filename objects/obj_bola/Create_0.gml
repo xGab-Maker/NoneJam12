@@ -1,7 +1,11 @@
 screen_shake(1);
 
+tipo = PODER.NORMAL;
+
 hspd = 0;
 vspd = 0;
+
+spd = 0;
 
 xscale = 1;
 yscale = 1;
@@ -12,6 +16,64 @@ colidi = 0;
 lim_colide = 6;
 
 entrou = false;
+
+last_col = noone;
+
+dano = 1;
+
+xscale_obj = 1;
+yscale_obj = 1;
+
+qnt_mini_balls = 3;
+
+cria_mini_bolas = function(_direction, _spd)
+{
+    var _qnt = 5;
+    
+    var _tiro = instance_create_layer(x+lengthdir_x(_qnt, _direction), y+lengthdir_y(_qnt, _direction), "Tiros", obj_bola);
+        
+    _tiro.hspd = lengthdir_x(_spd, _direction);
+    _tiro.vspd = lengthdir_y(_spd, _direction);
+    _tiro.depth = depth-1;
+    _tiro.image_angle = _direction;
+    _tiro.lim_colide = 3;
+    
+    _tiro.xscale_obj = .8;
+    _tiro.yscale_obj = .8;
+    
+    _tiro.xscale = .5*_tiro.xscale_obj;
+    _tiro.yscale = .5*_tiro.yscale_obj;
+}
+
+da_dano = function(_dano, _quem)
+{
+    switch (tipo) {
+        case PODER.FOGO: 
+            _quem.fogo.fogoso = true;
+        break;	
+        
+        case PODER.FRAG:
+            for (var i = 0; i < qnt_mini_balls; i++) {
+            	cria_mini_bolas(random_range(0, 359), spd*1.5);
+            }
+        break;
+    }
+    
+    var _r1 = random_range(-10, -5);
+    var _r2 = random_range(-10, -5);
+    
+    _quem.alpha_branco = 1;
+    _quem.angle = choose(_r1, _r2);
+    
+    with (_quem) {
+        if (inven == false and instance_exists(conjunto[0])){
+            conjunto[0].vida_perdida += _dano; 
+            inven = true;
+            
+            cria_vida();
+        }
+    }
+}
 
 colide_invert = function()
 {
@@ -29,10 +91,12 @@ colide_invert = function()
         if (_meet_wallx){
             hspd = -hspd;
             
-            xscale = .6;
-            yscale = 1.5;
+            xscale = 1.5;
+            yscale = .6;
             
             colidi++;
+            
+            last_col = noone;
         }
         
         if (_meet_wally){
@@ -42,58 +106,40 @@ colide_invert = function()
             yscale = .6;
             
             colidi++;
+            
+            last_col = noone;
         }
     }
     
     if (_inst_hs){
-        if (_inst_hs.estados != _inst_hs.estado_morre){
-            hspd = -hspd;
-            
-            var _r1 = random_range(-10, -5);
-            var _r2 = random_range(-10, -5);
-            
-            _inst_hs.alpha_branco = 1;
-            _inst_hs.angle = choose(_r1, _r2);
-            
-            with (_inst_hs) {
-                if (inven == false and instance_exists(conjunto[0])){
-            	    conjunto[0].vida_perdida++; 
-                    inven = true;
-                    
-                    cria_vida();
-                }
+        if (_inst_hs.estados != _inst_hs.estado_morre and last_col != _inst_hs){
+            if (tipo != PODER.PERF){
+                hspd = -hspd;
+                colidi++;
             }
             
-            xscale = .6;
-            yscale = 1.5;
+            da_dano(dano, _inst_hs);
             
-            colidi++;
+            xscale = 1.5;
+            yscale = .6;
+            
+            last_col = _inst_hs;
         }
     }
     
     if (_inst_vs){
-        if (_inst_vs.estados != _inst_vs.estado_morre){
-            vspd = -vspd;
-            
-            var _r1 = random_range(-10, -5);
-            var _r2 = random_range(-10, -5);
-            
-            _inst_vs.alpha_branco = 1;
-            _inst_vs.angle = choose(_r1, _r2);
-            
-            with (_inst_vs) {
-                if (inven == false and instance_exists(conjunto[0])){
-            	    conjunto[0].vida_perdida++; 
-                    inven = true;
-                    
-                    cria_vida();
-                }
+        if (_inst_vs.estados != _inst_vs.estado_morre and last_col != _inst_vs){
+            if (tipo != PODER.PERF){
+                vspd = -vspd;
+                colidi++;
             }
             
-            xscale = 1.3;
-            yscale = .8;
+            da_dano(dano, _inst_vs);
             
-            colidi++;
+            xscale = 1.5;
+            yscale = .6;
+            
+            last_col = _inst_vs;
         }
     }
     

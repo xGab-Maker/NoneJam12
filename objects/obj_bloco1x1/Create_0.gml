@@ -55,6 +55,80 @@ vida_predio = noone;
 
 rodou = false;
 
+fogo = {
+    img_fogo   : false,
+    fogoso     : false,
+    alp_fogoso : 0,
+    temp_fogo  : 3,
+    alp_icon   : 0,
+    
+    cooldown_fogoso     : game_get_speed(gamespeed_fps),
+    cooldown_end_fogoso : 0,
+}
+
+fogo.cooldown_end_fogoso = game_get_speed(gamespeed_fps)*fogo.temp_fogo;
+
+
+
+da_fogo = function()
+{
+    if (fogo.fogoso){
+        for (var i = 0; i < array_length(conjunto); i++) {
+            if (conjunto[i] != id){
+            	conjunto[i].fogo.alp_fogoso = lerp(conjunto[i].fogo.alp_fogoso, 1, .15);
+                conjunto[i].fogo.img_fogo = true;
+            }
+        }
+        
+        fogo.alp_icon = lerp(fogo.alp_icon, 1, .15);
+        
+        fogo.alp_fogoso = lerp(fogo.alp_fogoso, 1, .15);
+        
+        fogo.cooldown_end_fogoso--;
+        fogo.cooldown_end_fogoso = clamp(fogo.cooldown_end_fogoso, 0, infinity);
+        
+        if (fogo.cooldown_end_fogoso <= 0){
+            fogo.fogoso = false;
+            
+            for (var i = 0; i < array_length(conjunto); i++) {
+                if (conjunto[i] != id) conjunto[i].fogo.img_fogo = false;
+            }
+            
+            fogo.cooldown_end_fogoso = game_get_speed(gamespeed_fps)*fogo.temp_fogo;
+            
+            exit;
+        }
+        
+        fogo.cooldown_fogoso--;
+        fogo.cooldown_fogoso = clamp(fogo.cooldown_fogoso, 0, infinity);
+        
+        if (fogo.cooldown_fogoso <= 0){
+            if (instance_exists(conjunto[0])){
+                conjunto[0].vida_perdida++; 
+                
+                var _r1 = random_range(-10, -5);
+                var _r2 = random_range(-10, -5);
+                
+                alpha_branco = 1;
+                angle = choose(_r1, _r2);
+                
+                cria_vida();
+            }
+            
+            fogo.cooldown_fogoso = game_get_speed(gamespeed_fps);
+        }
+    }else{
+        if (fogo.img_fogo == false){
+            fogo.alp_fogoso = lerp(fogo.alp_fogoso, 0, .15);
+        }
+        
+        fogo.alp_icon = lerp(fogo.alp_icon, 0, .15);
+        
+        fogo.cooldown_fogoso = game_get_speed(gamespeed_fps);
+        fogo.cooldown_end_fogoso = game_get_speed(gamespeed_fps)*fogo.temp_fogo;
+    }
+}
+
 cria_vida = function()
 {
     var _segue = true;
@@ -311,12 +385,20 @@ estado_parado = function()
         
         screen_shake(5);
     }
+    
+    da_fogo();
 }
 
-estado_transicao = function() {auto_tile();}
+estado_transicao = function() {
+    auto_tile();
+    
+    fogo.alp_fogoso = lerp(fogo.alp_fogoso, 0, .15);
+}
 
 estado_morre = function()
 {
+    fogo.alp_fogoso = lerp(fogo.alp_fogoso, 0, .15);
+    
     if (vida_predio != noone){
         if (vida_predio.estado != vida_predio.estado_morre){
             vida_predio.vspd = -.5;

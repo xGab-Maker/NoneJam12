@@ -1,0 +1,3 @@
+aumenta_cima();
+
+estado();

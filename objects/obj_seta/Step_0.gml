@@ -60,3 +60,7 @@ xscale = elastic("xs", xscale, 1);
 yscale = elastic("ys", yscale, 1);
 
 qnt = lerp(qnt, 20, .15);
+
+if (tipo_bola == PODER.LASER){
+    image_alpha = lerp(image_alpha, 0, .15);
+}

@@ -96,3 +96,21 @@ function add_prog(_porc)
         }
     }
 }
+
+function pisca(_qnt = 1, _color = c_white, _rainbow = false){
+    if (global.pisca_des == false and instance_number(obj_pisca) < 2){
+        var _pisca =  instance_create_layer(0, 0, "Passivas", obj_pisca);
+        
+        if (instance_exists(_pisca)){
+            with (_pisca) {
+            	qnt = _qnt;
+                
+                if (_rainbow == false){
+                    cor = _color;
+                }else{
+                    colorido = true;
+                }
+            }
+        }
+    }
+}

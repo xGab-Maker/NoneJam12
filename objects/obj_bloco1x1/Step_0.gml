@@ -37,3 +37,5 @@ if (inven){
         cooldown_dano = game_get_speed(gamespeed_fps)*.1;
     }
 }
+
+

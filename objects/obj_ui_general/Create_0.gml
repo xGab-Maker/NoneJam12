@@ -69,23 +69,25 @@ desenha_bar_prog = function()
 
 #region UI Lateral
 
-cria_poder = function(_sprite, _txt) constructor 
+cria_poder = function(_sprite, _type, _txt) constructor 
 {
     spr = _sprite;
     
     texto = _txt;
+    
+    tipo = _type;
 }
 
-fogo     = new cria_poder(spr_fogo, "Por alguns segundos, a bola incendeia todos os blocos que toca, fazendo com que eles percam vida lentamente (como um dano ao longo do tempo).");
-vermelho = new cria_poder(spr_bola_vermelha, string("Ao segurar o botão \"{0}\", a barra dispara lasers retos para cima que podem destruir blocos. Ótimo para aqueles blocos teimosos no topo.", string("E")));
-laser    = new cria_poder(spr_laser, "A bola atravessa um bloco e continua, em vez de ricochetear. Ela só ricocheteia ao atingir a parede ou o teto. Perfeita para fileiras densas.");
-explode  = new cria_poder(spr_explode, "Ao atingir um bloco, ela explode e pequenas partículas (ou mini-bolas) voam em todas as direções, destruindo blocos vizinhos.");
-triple   = new cria_poder(spr_tres_bolas, "Cria uma ou mais bolas extras. O caos reina! (É clássico por um motivo).");
+fogo     = new cria_poder(spr_fogo, PODER.FOGO, "Por alguns segundos, a bola incendeia todos os blocos que toca, fazendo com que eles percam vida lentamente (como um dano ao longo do tempo).");
+laser    = new cria_poder(spr_bola_vermelha, PODER.LASER, string("Ao segurar o botão \"{0}\", a barra dispara lasers retos para cima que podem destruir blocos. Ótimo para aqueles blocos teimosos no topo.", string("E")));
+perfura  = new cria_poder(spr_laser, PODER.PERF, "A bola atravessa um bloco e continua, em vez de ricochetear. Ela só ricocheteia ao atingir a parede ou o teto. Perfeita para fileiras densas.");
+explode  = new cria_poder(spr_explode, PODER.FRAG, "Ao atingir um bloco, ela explode e pequenas partículas (ou mini-bolas) voam em todas as direções, destruindo blocos vizinhos.");
+triple   = new cria_poder(spr_tres_bolas, PODER.MULTI, "Cria uma ou mais bolas extras. O caos reina! (É clássico por um motivo).");
 
 lat = {
     fund : spr_outro_ui,
     
-    all_up : [fogo, vermelho, laser, explode, triple],
+    all_up : [fogo, laser, perfura, explode, triple],
     
     up_at : noone,
     up_xs : 1,
@@ -116,15 +118,36 @@ dsenha_ui_lateral = function()
         lat.let_eal = lerp(lat.let_eal, 1, .15);
         
         draw_sprite_ext(lat.up_at.spr, 0, _x_up, _y_up, lat.up_xs, lat.up_ys, lat.up_an, c_white, lat.up_al);
+        
+        var _txt_inix = 64;
+        var _txt_iniy = 286;
+        
+        var _txt_limx = 87;
+        
+        var _txt = scribble(lat.up_at.texto);
+        
+        var _scale = .17;
+        
+        _txt.transform(_scale, _scale, 0);
+        
+        _txt.wrap(_txt_limx/_scale, , false);
+        _txt.line_spacing("80%");
+        _txt.starting_format("fnt_escrita", c_white);
+        _txt.shadow(global.cores.black, 1);  
+        _txt.blend(c_white, 1);
+        
+        _txt.align(1);  
+        
+        _txt.draw(_txt_inix, _txt_iniy-5);
     }else{
         lat.let_eal = lerp(lat.let_eal, 0, .15);
         lat.let_eady = lerp(lat.let_eady, 0, .15);
     }
     
-    var _offy = sprite_get_height(spr_botao_e)*1.9;
-    var _offx = sprite_get_width(spr_botao_e)/2;
+    var _offy = sprite_get_height(spr_botao_e)/2.3;
+    var _offx = sprite_get_width(spr_botao_e)/1.5;
     
-    draw_sprite_ext(spr_botao_e, 0, _x_up+_offx, (_y_up+_offy)+lat.let_eady, lat.let_exs, lat.let_eys, 0, c_white, lat.let_eal);
+    draw_sprite_ext(spr_botao_e, 0, _x_up-_offx, (_y_up-_offy)+lat.let_eady, lat.let_exs, lat.let_eys, 0, c_white, lat.let_eal);
     
     if (keyboard_check_pressed(vk_enter)){
         if (lat.up_at == noone){
@@ -133,7 +156,16 @@ dsenha_ui_lateral = function()
             lat.up_at = noone;
         }
     }
+    
+    if (instance_exists(obj_seta)){
+        if (lat.up_at != noone){
+            obj_seta.tipo_bola = lat.up_at.tipo;
+        }else{
+            obj_seta.tipo_bola = PODER.NORMAL;
+        }
+    }
 }
+
 
 #endregion
 
