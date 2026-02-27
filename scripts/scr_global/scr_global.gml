@@ -18,3 +18,14 @@ global.pisca_des = false;
 global.cores = {
     black : #141527
 }
+
+global.width_map  = 12;
+global.height_map = 7;
+
+global.mapa = [];
+
+global.mapa = array_create(global.height_map, []);
+
+for (var i = 0; i < global.height_map; i++) {
+    global.mapa[i] = array_create(global.width_map, 0);
+}

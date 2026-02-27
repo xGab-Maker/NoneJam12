@@ -1,3 +1,5 @@
+pisca(.2, #F76F44);
+
 screen_shake(2);
 
 estado = noone;
@@ -18,8 +20,6 @@ aumenta_cima = function()
 
 estado_aumenta = function()
 {
-    screen_shake(1);
-    
     image_xscale = lerp(image_xscale, 3, .15);
     
     if (image_xscale >= 2.9){

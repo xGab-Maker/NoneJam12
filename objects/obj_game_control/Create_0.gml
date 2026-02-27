@@ -98,19 +98,6 @@ iniy = 96;
 width_block = 32;
 height_block = 32;
 
-width  = 12;
-height = 7;
-
-if (!variable_global_exists("mapa")){
-    global.mapa = [];
-}
-
-global.mapa = array_create(height, []);
-
-for (var i = 0; i < height; i++) {
-    global.mapa[i] = array_create(width, 0);
-}
-
 livres = [];
 
 return_livre = function(_obj, _num)
@@ -178,7 +165,7 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
     var _rand = -1;
     
     while (true) {
-    	_rand = [irandom_range(1, width)-1, irandom_range(1, height)-1];
+    	_rand = [irandom_range(1, global.width_map)-1, irandom_range(1, global.height_map)-1];
         
         
         var _quem = _blocks;

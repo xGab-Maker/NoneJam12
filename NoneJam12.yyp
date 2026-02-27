@@ -229,6 +229,7 @@
     {"id":{"name":"__shd_scribble_bake_shadow","path":"shaders/__shd_scribble_bake_shadow/__shd_scribble_bake_shadow.yy",},},
     {"id":{"name":"__shd_scribble","path":"shaders/__shd_scribble/__shd_scribble.yy",},},
     {"id":{"name":"sh_multi_color","path":"shaders/sh_multi_color/sh_multi_color.yy",},},
+    {"id":{"name":"sh_rainbow","path":"shaders/sh_rainbow/sh_rainbow.yy",},},
     {"id":{"name":"last_layer","path":"sprites/last_layer/last_layer.yy",},},
     {"id":{"name":"scribble_fallback_bulletpoint","path":"sprites/scribble_fallback_bulletpoint/scribble_fallback_bulletpoint.yy",},},
     {"id":{"name":"spr_arv_grandes","path":"sprites/spr_arv_grandes/spr_arv_grandes.yy",},},
