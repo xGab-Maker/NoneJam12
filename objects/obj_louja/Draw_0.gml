@@ -1,0 +1,3 @@
+randomize();
+
+desenha_louja();

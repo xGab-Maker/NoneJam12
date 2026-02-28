@@ -5,3 +5,7 @@ delete laser;
 delete perfura;
 delete explode;
 delete triple;
+delete bar_pred;
+delete money_info;
+delete global.money;
+delete global.cores;

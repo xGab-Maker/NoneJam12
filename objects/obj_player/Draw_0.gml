@@ -5,4 +5,4 @@ draw_sprite_ext(sprite_index, image_index, x, y, xscale, yscale, angle, image_bl
 //draw_text(x, y, sobe);
 //draw_text(20, 20, string("ladx {0}\nlady {1}", ladox, ladoy));
 
-draw_text(x, y, lado);
+//draw_text(x, y, lado);

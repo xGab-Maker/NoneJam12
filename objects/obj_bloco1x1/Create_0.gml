@@ -377,7 +377,7 @@ estado_parado = function()
             }
         }
         
-        add_prog(7);
+        add_prog_g(7);
         
         if (instance_exists(conjunto[ind_destroy])){
             conjunto[ind_destroy].estados = conjunto[ind_destroy].estado_morre;

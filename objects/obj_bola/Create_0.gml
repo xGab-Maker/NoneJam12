@@ -37,6 +37,7 @@ cria_mini_bolas = function(_direction, _spd)
     _tiro.depth = depth-1;
     _tiro.image_angle = _direction;
     _tiro.lim_colide = 3;
+    _tiro.image_blend = image_blend;
     
     _tiro.xscale_obj = .8;
     _tiro.yscale_obj = .8;

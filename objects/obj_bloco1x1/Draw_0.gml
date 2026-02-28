@@ -31,6 +31,14 @@ var _y = y+sprite_height/2;
 
 //draw_text(x, y-sprite_height/2, vida-vida_perdida);
 
+roda++;
+
+if (roda mod 30 == 0){
+    auto_tile();
+    
+    roda = 0;
+}
+
 if (qnt_blocos < global.blocos_qnt){
     auto_tile();
     

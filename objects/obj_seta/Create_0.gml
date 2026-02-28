@@ -3,7 +3,8 @@ pai = noone;
 paix = 0;
 paiy = 0;
 
-cooldown_atira = 0;
+cooldown_atira_ref = game_get_speed(gamespeed_fps)*.4;
+cooldown_atira     = 0;
 
 xscale = 1;
 yscale = 1;
@@ -41,6 +42,18 @@ atira = function(_direction, _qnt)
                 
                 _ang_at += _add_ang;
             }
+        
+            if (instance_exists(pai)){
+                with (pai) {
+                    if (lado == "b" or lado == "c" or lado == "a" or lado == "d"){
+                        xscale = .9;
+                	    yscale = 1.3;
+                    }else{
+                        xscale = 1.3;
+                	    yscale = .9;
+                    }
+                }
+            }
         break;
         
         case PODER.LASER:
@@ -55,6 +68,18 @@ atira = function(_direction, _qnt)
                 	case "c": _laser.image_angle = 90 break;
                 }
             }    
+        
+            if (instance_exists(pai)){
+                with (pai) {
+                    if (lado == "b" or lado == "c" or lado == "a" or lado == "d"){
+                        xscale = .5;
+                	    yscale = 2;
+                    }else{
+                        xscale = 2;
+                	    yscale = .5;
+                    }
+                }
+            }
         break;
         
         default:
@@ -69,23 +94,23 @@ atira = function(_direction, _qnt)
             
             _tiro.xscale = .5;
             _tiro.yscale = .5;
+        
+            if (instance_exists(pai)){
+                with (pai) {
+                    if (lado == "b" or lado == "c" or lado == "a" or lado == "d"){
+                        xscale = .9;
+                	    yscale = 1.3;
+                    }else{
+                        xscale = 1.3;
+                	    yscale = .9;
+                    }
+                }
+            }
         break;
     }
     
     xscale = 1.2;
     yscale = .6;  
-    
-    if (instance_exists(pai)){
-        with (pai) {
-            if (lado == "b" or lado == "c" or lado == "a" or lado == "d"){
-                xscale = .9;
-        	    yscale = 1.3;
-            }else{
-                xscale = 1.3;
-        	    yscale = .9;
-            }
-        }
-    }
     
     qnt = 10;
 }

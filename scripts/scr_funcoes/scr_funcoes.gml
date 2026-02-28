@@ -70,11 +70,13 @@ function pega_numb(_analyse)
     return _num;    
 }
 
-function add_prog(_porc)
+function add_prog_g(_porc)
 {
     var _add = _porc/100;
     
     global.progressao += _add;
+    
+    global.progressao = clamp(global.progressao, 0, 1);
     
     if (instance_exists(obj_ui_general)){
         var _analise = 1;
@@ -97,6 +99,50 @@ function add_prog(_porc)
     }
 }
 
+function add_prog_p(_porc)
+{
+    var _sai = false;
+    
+    for (var i = 0; i < array_length(global.mapa); i++) {
+    	for (var j = 0; j < array_length(global.mapa[i]); j++) {
+        	if (global.mapa[i][j] == 0){
+                _sai = true;
+                
+                break;
+            }
+        }
+    }
+    
+    if (!_sai) game_end();
+    
+    var _add = _porc/100;
+    
+    global.progress_pred += _add;
+    
+    global.progress_pred = clamp(global.progress_pred, 0, 1);
+    
+    if (global.progress_pred >= 1){
+        if (instance_exists(obj_game_control)){
+            with (obj_game_control) {
+                repeat (2) {
+                	checa_livres();
+                }
+                
+                checa_livres(array_arvs, obj_arv_grande);
+            }
+        }
+        
+        if (instance_exists(obj_ui_general)){
+            with (obj_ui_general) {
+            	bar_pred.sc_xs = 1;
+            	bar_pred.sc_ys = .7;
+            }
+        }
+        
+        global.progress_pred = 0;
+    }
+}
+
 function pisca(_qnt = 1, _color = c_white, _rainbow = false){
     if (global.pisca_des == false and instance_number(obj_pisca) < 2){
         var _pisca =  instance_create_layer(0, 0, "Passivas", obj_pisca);
@@ -114,3 +160,79 @@ function pisca(_qnt = 1, _color = c_white, _rainbow = false){
         }
     }
 }
+
+function resume_numeros(_quantia, _letter_add = "")
+{
+    var _letter = ["K", "M", "B", "T", "Q", "Qt", "Sx", "Sp", "Oc", "N", "De", "INF"];
+    var _newletter = "";
+    
+    var _money = 0;
+    
+    if (variable_global_exists("money")){
+        _money = _quantia;
+    }
+    
+    var _din = string(_money);
+    
+    var _lenght = string_length(_din);
+    var _din_write = string_length(_din);
+    
+    var _casa = 0;
+    
+    var _indice = 1;
+    
+    for (var i = 0; i < array_length(_letter); i++) {
+        _indice += 3;
+        
+    	if (_lenght >= _indice){
+            if (_lenght > 3){
+                _newletter = _letter[i];
+                
+                _din_write = _lenght-(_indice-1);
+                
+                _casa = string_copy(_din, _lenght-(_indice-2), 1)
+                
+                if (_letter[i] == "INF"){
+                    _din_write = 0;
+                    _casa = 0;
+                }
+            }
+        }
+    }
+    
+    var _escrita = string_copy(_din, 0, _din_write);
+    var _escrita_casa = "," + string(_casa);
+    
+    if (_casa == 0){
+        _escrita_casa = "";
+    }
+    
+    var _txt = string("{0}{1}{2}{3}", _letter_add, _escrita,  _escrita_casa, _newletter);
+    
+    return _txt;
+}
+
+function transciona(_local)
+{
+    var _trans = instance_create_layer(0, 0, "Passivas", obj_transicao);
+    
+    with (_trans) {
+        local = _local;        	
+    }        
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

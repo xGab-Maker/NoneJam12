@@ -5,7 +5,7 @@ enum PODER {
     MULTI, // Feito
     PERF, // Feito
     FRAG, // Feito
-    LASER, //
+    LASER, // Feito 
     NORMAL // Feito
 }
 
@@ -15,8 +15,22 @@ global.progressao = 0;
 
 global.pisca_des = false;
 
+global.entra_other = false;
+
+global.add_bar_pred = .5;
+
+global.progress_pred = 0;
+
+global.blocos_quebrados = 0;
+
 global.cores = {
-    black : #141527
+    black : #141527,
+    white : #F7FFFD
+}
+
+global.money = {
+    brain : 0,
+    star  : 0
 }
 
 global.width_map  = 12;
@@ -29,3 +43,31 @@ global.mapa = array_create(global.height_map, []);
 for (var i = 0; i < global.height_map; i++) {
     global.mapa[i] = array_create(global.width_map, 0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

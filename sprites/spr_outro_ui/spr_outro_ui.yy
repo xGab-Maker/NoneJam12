@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Lateral",
-    "path":"folders/Sprites/UI/Lateral.yy",
+    "name":"Misc",
+    "path":"folders/Sprites/UI/Lateral/Misc.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

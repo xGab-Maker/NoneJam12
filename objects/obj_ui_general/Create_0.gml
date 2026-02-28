@@ -99,11 +99,171 @@ lat = {
     let_eys  : 1,
     let_eal  : 0,
     let_eady : 0,
+    
+    txt_addy  : 0,
+    txt_ad_mx : 0,
+    
+    sl_qnt : 0,
+    sl_spr : spr_slider,
+    sl_sc  : [1, 1],
+    sl_x   : 113,
+    sl_y   : 288,
+    nsl_y  : 288,
+    sl_w   : 0,
+    sl_h   : 0,
+    sl_ini : 288,
+    sl_end : 328,
+    sl_in  : false,
+    sl_segue : false,
 }
+
+lat.sl_w = sprite_get_width(lat.sl_spr);
+lat.sl_h = sprite_get_height(lat.sl_spr);
 
 lat.up_at = lat.all_up[0];
 
-dsenha_ui_lateral = function()
+bar_pred = {
+    spr : spr_barra_pred,
+    
+    x : 64,
+    y : 223,
+    
+    qnt : global.progress_pred,
+    
+    xs : 0,
+    ys : 1,
+    
+    sc_xs : 1,
+    sc_ys : 1,
+    
+    max_ys : 87,
+    
+    obj_xs : 0,
+    
+    w : 0,
+    h : 0,
+}
+
+bar_pred.w = sprite_get_width(bar_pred.spr);
+bar_pred.h = sprite_get_height(bar_pred.spr);
+
+bar_pred.obj_xs = (bar_pred.max_ys/bar_pred.w)*bar_pred.qnt;
+
+bar_pred.xs = bar_pred.obj_xs;
+
+money_info = {
+    objs : [spr_din1, spr_din2],
+    
+    x : [20, 21],
+    y : [169, 194],
+    
+    xs : [1, 1],
+    ys : [1, 1],
+    
+    txt_xs : [1, 1],
+    txt_ys : [1, 1],
+    
+    qnts : [global.money.brain, global.money.star]
+}
+
+slider_txts = function()
+{
+    var _col = point_in_rectangle(mouse_x, mouse_y, lat.sl_x-lat.sl_w/2, lat.sl_y-lat.sl_h/2, lat.sl_x+lat.sl_w/2, lat.sl_y+lat.sl_h/2);
+    
+    if (_col or lat.sl_segue){
+        if (!lat.sl_in){
+            lat.sl_sc[0] = 1.2;
+            lat.sl_sc[1] = .7;
+        }
+        
+        if (mouse_check_button_pressed(mb_left)){
+            lat.sl_sc[0] = .7;
+            lat.sl_sc[1] = 1.2;
+        }
+        
+        if (mouse_check_button(mb_left)){
+            lat.sl_segue = true;
+            
+            global.entra_other = true;
+        }else{
+            lat.sl_segue = false;
+            
+            global.entra_other = false;
+        }
+        
+        lat.sl_in = true;
+    }else{
+        if (lat.sl_in and !lat.sl_segue){
+            lat.sl_in = false;
+            
+            global.entra_other = false;
+        }
+    }
+    
+    draw_line_width_color(lat.sl_x-1, lat.sl_ini, lat.sl_x-1, lat.sl_end, 2, #43222B, #43222B);
+    
+    draw_sprite_ext(lat.sl_spr, 0, lat.sl_x, lat.sl_y, lat.sl_sc[0], lat.sl_sc[1], 0, c_white, 1);
+    
+    if (lat.sl_segue){
+        lat.nsl_y = mouse_y;
+    }
+    
+    lat.sl_sc[0] = elastic("latsl_scx", lat.sl_sc[0], 1, 1.5, .15);
+    lat.sl_sc[1] = elastic("latsl_scy", lat.sl_sc[1], 1, 1.5, .15);
+    
+    lat.sl_y = lerp(lat.sl_y, lat.nsl_y, .2);
+    
+    lat.sl_y = clamp(lat.sl_y, lat.sl_ini, lat.sl_end);
+    
+    lat.sl_qnt = (lat.sl_y - lat.sl_ini) / (lat.sl_end - lat.sl_ini);
+}
+
+barra_predios = function()
+{
+    bar_pred.qnt = global.progress_pred;
+    
+    bar_pred.obj_xs = (bar_pred.max_ys/bar_pred.w)*bar_pred.qnt;
+    
+    shader_set(sh_multi_color);
+    draw_sprite_ext(bar_pred.spr, 0, bar_pred.x, bar_pred.y, bar_pred.obj_xs*bar_pred.sc_xs, bar_pred.ys*bar_pred.sc_ys, 0, c_white, 1);
+    shader_reset();
+    
+    draw_sprite_ext(bar_pred.spr, 0, bar_pred.x, bar_pred.y, bar_pred.xs*bar_pred.sc_xs, bar_pred.ys*bar_pred.sc_ys, 0, c_white, 1);
+    
+    bar_pred.xs = lerp(bar_pred.xs, bar_pred.obj_xs, .1);
+    
+    bar_pred.sc_xs = elastic("bar_predscsx", bar_pred.sc_xs, 1, , .2);
+    bar_pred.sc_ys = elastic("bar_predscsy", bar_pred.sc_ys, 1, , .2);
+    
+    add_prog_p(global.add_bar_pred+(global.blocos_quebrados/500));
+}
+
+mostra_dinheiro = function()
+{
+    money_info.qnts = [global.money.brain, global.money.star];
+    
+    for (var i = 0; i < array_length(money_info.objs); i++) {
+    	draw_sprite_ext(money_info.objs[i], 0, money_info.x[i], money_info.y[i], money_info.xs[i], money_info.ys[i], 0, c_white, 1);
+        draw_set_valign(1);
+        draw_set_halign(-1);
+        draw_set_font(fnt_base);
+        draw_set_color(global.cores.black);
+        draw_text_transformed(money_info.x[i]+23, money_info.y[i]+1, resume_numeros(money_info.qnts[i]), money_info.txt_xs[i]/3.3, money_info.txt_ys[i]/3.3, 0);
+        draw_set_color(global.cores.white);
+        draw_text_transformed(money_info.x[i]+23, money_info.y[i]-1, resume_numeros(money_info.qnts[i]), money_info.txt_xs[i]/3.3, money_info.txt_ys[i]/3.3, 0);
+        draw_set_font(fnt_base);
+        draw_set_halign(-1);
+        draw_set_valign(-1);
+        
+        money_info.xs[i] = elastic("money_info.xs" + string(i), money_info.xs[i], 1, , .2);
+        money_info.ys[i] = elastic("money_info.ys" + string(i), money_info.ys[i], 1, , .2);
+        
+        money_info.txt_xs[i] = elastic("money_info.txt_xs" + string(i), money_info.txt_xs[i], 1, , .25);
+        money_info.txt_ys[i] = elastic("money_info.txt_ys" + string(i), money_info.txt_ys[i], 1, , .25);
+    }
+}
+
+desenha_ui_lateral = function()
 {
     var _x_lat = 0;
     var _y_lat = 0;
@@ -114,11 +274,6 @@ dsenha_ui_lateral = function()
     var _y_up = 261;
     
     if (lat.up_at != noone){
-        lat.let_eady = lerp(lat.let_eady, -10, .15);
-        lat.let_eal = lerp(lat.let_eal, 1, .15);
-        
-        draw_sprite_ext(lat.up_at.spr, 0, _x_up, _y_up, lat.up_xs, lat.up_ys, lat.up_an, c_white, lat.up_al);
-        
         var _txt_inix = 64;
         var _txt_iniy = 286;
         
@@ -134,11 +289,27 @@ dsenha_ui_lateral = function()
         _txt.line_spacing("80%");
         _txt.starting_format("fnt_escrita", c_white);
         _txt.shadow(global.cores.black, 1);  
-        _txt.blend(c_white, 1);
+        _txt.blend(global.cores.white, 1);
         
         _txt.align(1);  
         
-        _txt.draw(_txt_inix, _txt_iniy-5);
+        lat.txt_ad_mx = (_txt.get_height()/1.5)*_scale;
+        
+        lat.txt_addy = lat.txt_ad_mx*lat.sl_qnt;
+        
+        _txt.draw(_txt_inix, _txt_iniy-5-lat.txt_addy);
+        
+        draw_sprite(spr_outro_ui_baix, 0, 0, 0);
+        draw_sprite(spr_outro_ui_sup, 0, 0, 0);
+    }
+    
+    slider_txts();
+    
+    if (lat.up_at != noone){
+        lat.let_eady = lerp(lat.let_eady, -10, .15);
+        lat.let_eal = lerp(lat.let_eal, 1, .15);
+        
+        draw_sprite_ext(lat.up_at.spr, 0, _x_up, _y_up, lat.up_xs, lat.up_ys, lat.up_an, c_white, lat.up_al);
     }else{
         lat.let_eal = lerp(lat.let_eal, 0, .15);
         lat.let_eady = lerp(lat.let_eady, 0, .15);
@@ -164,11 +335,14 @@ dsenha_ui_lateral = function()
             obj_seta.tipo_bola = PODER.NORMAL;
         }
     }
+    
+    barra_predios();
+    
+    mostra_dinheiro();
 }
 
 
 #endregion
-
 
 #region Gerais
 

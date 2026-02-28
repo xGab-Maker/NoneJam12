@@ -12,4 +12,7 @@ yscale = elastic("xs", yscale, yscale_obj);
 
 switch (tipo) {
 	case PODER.PERF: image_alpha = .5 break;
+    case PODER.FOGO: image_blend = c_orange break;
+    case PODER.MULTI: image_blend = c_lime break;
+    case PODER.FRAG: image_blend = c_aqua break;
 }

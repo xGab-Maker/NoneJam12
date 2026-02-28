@@ -1,6 +1,6 @@
-pisca(.2, #F76F44);
+//pisca(.2, #F76F44);
 
-screen_shake(2);
+screen_shake(5);
 
 estado = noone;
 

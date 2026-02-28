@@ -48,12 +48,21 @@ image_angle = _dir+90;
 cooldown_atira--;
 cooldown_atira = clamp(cooldown_atira, 0, infinity);
 
-if (mouse_check_button(mb_left)){
+if (mouse_check_button(mb_left) and !global.entra_other){
     if (cooldown_atira <= 0){
         atira(_dir, qnt);
         
-        cooldown_atira = game_get_speed(gamespeed_fps)*.4;
+        cooldown_atira = cooldown_atira_ref;
     }
+}
+
+switch (tipo_bola) {
+    case PODER.NORMAL: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.4 break;
+    case PODER.FOGO: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.7 break;
+    case PODER.FRAG: cooldown_atira_ref = game_get_speed(gamespeed_fps) break;
+    case PODER.LASER: cooldown_atira_ref = game_get_speed(gamespeed_fps) break;
+    case PODER.MULTI: cooldown_atira_ref = game_get_speed(gamespeed_fps)*2 break;
+    case PODER.PERF: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.5 break;
 }
 
 xscale = elastic("xs", xscale, 1);
@@ -63,4 +72,6 @@ qnt = lerp(qnt, 20, .15);
 
 if (tipo_bola == PODER.LASER){
     image_alpha = lerp(image_alpha, 0, .15);
+}else{
+    image_alpha = lerp(image_alpha, 1, .15);
 }

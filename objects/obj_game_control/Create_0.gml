@@ -210,7 +210,7 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
                 _block.cord = [_return[i][0], _return[i][1]];
             }
             
-            var _num_rand = random_range(-1000, 1000);
+            var _num_rand = random_range(-10000000000, 10000000000);
             
             for (var i = 0; i < array_length(_all_blocks); i++) {
             	_all_blocks[i].conjunto = _all_blocks;
