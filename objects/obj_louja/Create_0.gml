@@ -465,7 +465,7 @@ desenha_louja = function()
             
             sai_ang = random_range(-30, 30);
             
-            transciona(rm_1);
+            transciona(rm_1, 1);
         }
         
         selec_sai = true;

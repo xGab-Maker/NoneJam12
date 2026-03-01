@@ -11,7 +11,9 @@ enum PODER {
     NORMAL // Feito
 }
 
-global.waves_qnt = [100, 300, 500, 750, 900];
+global.para_sobe = false;
+
+global.waves_qnt = [100, 300, 500, 750, 900, 1500, 2000, 3500, 4250, 5000];
 
 global.blocos_qnt = 0;
 
@@ -32,7 +34,7 @@ global.blocos_quebrados = 0;
 
 global.combus_qnt = 1;
 
-global.numwave = 1;
+global.numwave = 0;
 
 global.upg = {
     qnt_col : 4,
@@ -68,6 +70,8 @@ global.money = {
 
 global.width_map  = 12;
 global.height_map = 7;
+
+global.pause = false;
 
 global.mapa = [];
 

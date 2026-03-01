@@ -1,3 +1,5 @@
+if (global.pause) exit;
+
 depth = -y;
 
 var _dir = point_direction(paix, paiy, mouse_x, mouse_y);
@@ -49,10 +51,12 @@ cooldown_atira--;
 cooldown_atira = clamp(cooldown_atira, 0, infinity);
 
 if (mouse_check_button(mb_left) and !global.entra_other){
-    if (cooldown_atira <= 0){
-        atira(_dir, qnt);
-        
-        cooldown_atira = cooldown_atira_ref/global.upg.vel_ati;
+    if (image_alpha >= .95 or tipo_bola == PODER.LASER and pod_atira){
+        if (cooldown_atira <= 0){
+            atira(_dir, qnt);
+            
+            cooldown_atira = cooldown_atira_ref/global.upg.vel_ati;
+        }
     }
 }
 

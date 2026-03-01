@@ -17,6 +17,8 @@ sobe = false;
 sombray = y;
 sombrax = x;
 
+alp_branco = 0;
+
 margemx = sprite_width+2;
 margemy = sprite_height+16;
 
@@ -42,7 +44,7 @@ lado = 0;
 
 shakeado = false;
 
-cooldown_sobe = game_get_speed(gamespeed_fps)*.5;
+cooldown_sobe = game_get_speed(gamespeed_fps)*1.5;
 
 inputs = function()
 {
@@ -194,9 +196,12 @@ estado_move = function()
 
 estado_sobe = function()
 {
-    depth = -9999;
+    depth = -99999;
     
-    if (instance_exists(obj_seta)) obj_seta.invisible = true;
+    if (instance_exists(obj_seta)){
+        obj_seta.invisible = true;
+        obj_seta.pod_atira = false;
+    }
     
     nangle = 0;
     
@@ -241,15 +246,18 @@ estado_sobe = function()
     global.last_pos.sobep = sobe;
     
     if (y <= 0){
-        transciona(rm_upgrades);
+        transciona(rm_upgrades, 0);
     }
 }
 
 estado_cai = function()
 {
-    depth = -9999;
+    depth = -99999;
     
-    if (instance_exists(obj_seta)) obj_seta.invisible = true;
+    if (instance_exists(obj_seta)){
+        obj_seta.invisible = true;
+        obj_seta.pod_atira = false;
+    }
     
     nangle = 0;
     
@@ -276,7 +284,12 @@ estado_cai = function()
         
         screen_shake(5);
         
-        if (instance_exists(obj_seta)) obj_seta.invisible = false;
+        global.para_sobe = false;
+        
+        if (instance_exists(obj_seta)){
+            obj_seta.invisible = false;
+            obj_seta.pod_atira = true;
+        }
     }    
 }
 

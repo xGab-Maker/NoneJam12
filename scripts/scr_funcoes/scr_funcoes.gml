@@ -115,7 +115,7 @@ function add_prog_p(_porc)
         }
     }
     
-    if (!_sai) exit;
+    if (!_sai or global.para_sobe) exit;
     
     var _add = _porc/100;
     
@@ -165,7 +165,7 @@ function pisca(_qnt = 1, _color = c_white, _rainbow = false){
 
 function resume_numeros(_quantia, _letter_add = "")
 {
-    var _letter = ["K", "M", "B", "T", "Q", "Qt", "Sx", "Sp", "Oc", "N", "De", "INF"];
+    var _letter = ["K", "M", "B", "T", "Q", "Qt", "Sx", "Sp", "Oc", "N", "De", "Inf"];
     var _newletter = "";
     
     var _money = 0;
@@ -194,7 +194,7 @@ function resume_numeros(_quantia, _letter_add = "")
                 
                 _casa = string_copy(_din, _lenght-(_indice-2), 1)
                 
-                if (_letter[i] == "INF"){
+                if (_letter[i] == "Inf"){
                     _din_write = 0;
                     _casa = 0;
                 }
@@ -214,12 +214,13 @@ function resume_numeros(_quantia, _letter_add = "")
     return _txt;
 }
 
-function transciona(_local)
+function transciona(_local, _pla_at)
 {
     var _trans = instance_create_layer(0, 0, "Passivas", obj_transicao);
     
     with (_trans) {
-        local = _local;        	
+        local = _local;  
+        indini = _pla_at;
     }        
 } 
 

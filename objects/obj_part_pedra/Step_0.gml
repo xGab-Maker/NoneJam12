@@ -1,3 +1,5 @@
+if (global.pause) exit;
+
 image_alpha -= .01;
 
 if (image_alpha <= .01){

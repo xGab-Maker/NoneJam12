@@ -1,3 +1,5 @@
+if (global.pause) exit;
+
 depth = -y;
 
 colide_invert();

@@ -1,4 +1,4 @@
-depth = -99999;
+depth = -999999;
 
 #region Barra Progressão
 
@@ -81,17 +81,17 @@ desenha_bar_prog = function()
     draw_set_valign(1);
     draw_set_font(fnt_louja);
     draw_set_color(global.cores.black);
-    draw_text_transformed(_starx+16, _stary+2+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
+    draw_text_transformed(_starx+16, _stary+2+bar_prog.addy_star, resume_numeros(bar_prog.star_need), .3, .3, 0);
     draw_set_color(global.cores.white);
-    draw_text_transformed(_starx+15, _stary+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
+    draw_text_transformed(_starx+15, _stary+bar_prog.addy_star, resume_numeros(bar_prog.star_need), .3, .3, 0);
     draw_set_font(-1);
     draw_set_valign(-1);
     draw_set_halign(-1);
     
     if (global.money.star >= bar_prog.star_need){
-        global.numwave++;
+        global.para_sobe = true;
         
-        global.numwave = clamp(global.numwave, 0, array_length(global.waves_qnt)-1);
+        wd.anim = true;
     }
     
     global.progressao = clamp(global.progressao, 0, 1);
@@ -113,7 +113,7 @@ cria_poder = function(_sprite, _type, _txt) constructor
 }
 
 fogo     = new cria_poder(spr_fogo, PODER.FOGO, "Por alguns segundos, a bola incendeia todos os blocos que toca, fazendo com que eles percam vida lentamente (como um dano ao longo do tempo).");
-laser    = new cria_poder(spr_bola_vermelha, PODER.LASER, string("Ao segurar o botão \"{0}\", a barra dispara lasers retos para cima que podem destruir blocos. Ótimo para aqueles blocos teimosos no topo.", string("E")));
+laser    = new cria_poder(spr_bola_vermelha, PODER.LASER, string("Invés da classica bolinha irá disparar lasers retos para cima que podem destruir blocos. Ótimo para aqueles blocos teimosos no topo."));
 perfura  = new cria_poder(spr_laser, PODER.PERF, "A bola atravessa um bloco e continua, em vez de ricochetear. Ela só ricocheteia ao atingir a parede ou o teto. Perfeita para fileiras densas.");
 explode  = new cria_poder(spr_explode, PODER.FRAG, "Ao atingir um bloco, ela explode e pequenas partículas (ou mini-bolas) voam em todas as direções, destruindo blocos vizinhos.");
 triple   = new cria_poder(spr_tres_bolas, PODER.MULTI, "Cria uma ou mais bolas extras. O caos reina! (É clássico por um motivo).");
@@ -230,30 +230,123 @@ bar_combus.xs = bar_combus.obj_xs;
 
 wd = {
     wspr : spr_caveira,
+    swx   : 110,
+    swy   : 144,
+    
     wx   : 110,
     wy   : 144,
     
     dspr : spr_explosao,
     dx   : 44,
     dy   : 144,
+    
+    anim : false,
+    
+    wxs : 1,
+    wys : 1,
+    
+    nlx  : room_width/2,
+    nly  : room_height+20,
+    nvsp : 0,
+    
+    qualp : 0
 }
 
 desenha_wd = function()
 {
-    draw_sprite(wd.wspr, 0, wd.wx, wd.wy);
     draw_sprite(wd.dspr, 0, wd.dx, wd.dy);
     
     draw_set_halign(2);
     draw_set_valign(1);
     draw_set_color(global.cores.black);
-    draw_text_transformed(wd.wx-10, wd.wy+2, global.numwave, .3, .3, 0);
-    draw_set_color(global.cores.white);
-    draw_text_transformed(wd.wx-10, wd.wy, global.numwave, .3, .3, 0);
-    
-    draw_set_color(global.cores.black);
     draw_text_transformed(wd.dx-11, wd.dy+2, global.upg.dmg, .3, .3, 0);
     draw_set_color(global.cores.white);
     draw_text_transformed(wd.dx-11, wd.dy, global.upg.dmg, .3, .3, 0);
+
+    draw_set_alpha(wd.qualp);
+    draw_set_color(c_gray);
+    draw_rectangle(0, 0, room_width*2, room_height*2, false);
+    draw_set_color(c_white);
+    draw_set_alpha(1);    
+    
+    draw_sprite_ext(wd.wspr, 0, wd.wx, wd.wy, wd.wxs, wd.wys, 0, c_white, 1);
+    
+    draw_set_color(global.cores.black);
+    draw_text_transformed(wd.wx-10*wd.wxs, wd.wy+2*wd.wys, global.numwave+1, .3*wd.wxs, .3*wd.wys, 0);
+    draw_set_color(global.cores.white);
+    draw_text_transformed(wd.wx-10*wd.wxs, wd.wy, global.numwave+1, .3*wd.wxs, .3*wd.wys, 0);
+    
+    if (wd.anim){
+        global.pause = true;
+        
+        wd.qualp = lerp(wd.qualp, .5, .15);
+        
+        var _depth = depth;
+        
+        with (obj_dinheiro1) {
+            off_depth = true;
+        	depth = _depth+1;
+        }
+        
+        with (obj_dinheiro2) {
+            off_depth = true;
+        	depth = _depth+1;
+        }
+        
+        wd.wx = lerp(wd.wx, room_width/2+string_width(string(global.numwave+1))*(.3*wd.wxs), .15);
+        wd.wy = lerp(wd.wy, room_height/2-100, .15);
+        
+        wd.nlx = wd.wx;
+        
+        wd.wxs = lerp(wd.wxs, 3, .15);
+        wd.wys = lerp(wd.wys, 3, .15);
+        
+        if (point_distance(wd.wx, wd.wy, room_width/2+string_width(string(global.numwave+1))*(.3*wd.wxs), room_height/2-100) <= 2){
+            draw_set_color(global.cores.black);
+            draw_text_transformed(wd.nlx, wd.nly+2*(wd.wxs), "+1", .3*wd.wxs, .3*wd.wys, 0);
+            draw_set_color(global.cores.white);
+            draw_text_transformed(wd.nlx, wd.nly, "+1", .3*wd.wxs, .3*wd.wys, 0);
+            
+            wd.nvsp -= .3;
+            
+            wd.nly += wd.nvsp;
+            
+            if (wd.nly <= wd.wy+(string_height(string(global.numwave+1))/2)*(.3*wd.wys)){
+                wd.anim = false;
+                
+                global.numwave++;
+                
+                if (instance_exists(obj_player)){
+                    obj_player.estado = obj_player.estado_sobe;
+                    obj_player.alp_branco = 1;
+                }
+        
+                global.numwave = clamp(global.numwave, 0, array_length(global.waves_qnt)-1);
+                
+                screen_shake(4);
+                pisca(.5, c_yellow);
+            }
+        }
+    }else{
+        global.pause = false;
+        
+        with (obj_dinheiro1) {
+            off_depth = false;
+        }
+        
+        with (obj_dinheiro2) {
+            off_depth = false;
+        }
+        
+        wd.qualp = lerp(wd.qualp, 0, .15);
+        
+        wd.wx = lerp(wd.wx, 110, .15);
+        wd.wy = lerp(wd.wy, 144, .15);
+        
+        wd.wxs = lerp(wd.wxs, 1, .1);
+        wd.wys = lerp(wd.wys, 1, .1);
+    }
+    
     draw_set_halign(-1);
     draw_set_valign(-1);
 }
@@ -276,6 +369,8 @@ desenha_combustivel = function()
     bar_combus.sc_ys = elastic("bar_combusscsy", bar_combus.sc_ys, 1, , .2);    
     
     draw_sprite(spr_fundo_comb, 0, 63, 118);
+    
+    global.combus_qnt -= .0001;
     
     global.combus_qnt = clamp(global.combus_qnt, 0, 1);
 }
@@ -349,7 +444,12 @@ barra_predios = function()
     bar_pred.sc_xs = elastic("bar_predscsx", bar_pred.sc_xs, 1, , .2);
     bar_pred.sc_ys = elastic("bar_predscsy", bar_pred.sc_ys, 1, , .2);
     
-    add_prog_p(global.add_bar_pred+(global.blocos_quebrados/500));
+    if (!global.para_sobe){
+        add_prog_p(global.add_bar_pred+(global.blocos_quebrados/500));
+    }else{
+        global.progress_pred -= .1;
+        global.progress_pred = clamp(global.progress_pred, 0, 1);
+    }
 }
 
 mostra_dinheiro = function()

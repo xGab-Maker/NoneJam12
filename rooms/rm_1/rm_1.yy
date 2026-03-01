@@ -16,6 +16,7 @@
     {"name":"inst_12E230B1","path":"rooms/rm_1/rm_1.yy",},
     {"name":"inst_14D5E6E2","path":"rooms/rm_1/rm_1.yy",},
     {"name":"inst_341B7B04","path":"rooms/rm_1/rm_1.yy",},
+    {"name":"inst_418E4952","path":"rooms/rm_1/rm_1.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -40,6 +41,7 @@
         {"$GMRInstance":"v2","%Name":"inst_243A7C47","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_243A7C47","objectId":{"name":"obj_colisao_bola","path":"objects/obj_colisao_bola/obj_colisao_bola.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":0.640625,"scaleY":10.0625,"x":624.75,"y":181.0,},
         {"$GMRInstance":"v2","%Name":"inst_5A3F2BF6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5A3F2BF6","objectId":{"name":"obj_colisao_bola","path":"objects/obj_colisao_bola/obj_colisao_bola.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":15.484376,"scaleY":0.5,"x":392.25,"y":20.0,},
         {"$GMRInstance":"v2","%Name":"inst_6D9556E0","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_6D9556E0","objectId":{"name":"obj_entrou","path":"objects/obj_entrou/obj_entrou.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":14.71875,"scaleY":9.40625,"x":384.0,"y":178.5,},
+        {"$GMRInstance":"v2","%Name":"inst_418E4952","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_418E4952","objectId":{"name":"obj_helicoptero","path":"objects/obj_helicoptero/obj_helicoptero.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":384.0,"y":160.0,},
       ],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":400,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_fundo","path":"sprites/spr_fundo/spr_fundo.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],

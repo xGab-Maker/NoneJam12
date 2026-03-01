@@ -3,28 +3,37 @@ estado = noone;
 pontox = 20;
 pontoy = 169;
 
+off_depth = false;
+
 ind = 0;
 
-vspeed = -random_range(2, 4);
+spd  = 0;
+hspd = 0;
+vspd = 0;
+
+last_speed = speed;
+
+vspd = -random_range(2, 4);
 
 estado_sobe = function()
 {
-    vspeed = lerp(vspeed, 0, .1);
+    vspd = lerp(vspd, 0, .1);
     
-    if (vspeed >= -.05){
+    if (vspd >= -.05){
         estado = estado_segue;
         
-        vspeed = 0;
+        vspd = 0;
     }
 }
 
 estado_segue = function()
 {
-    speed += .1
+    spd += .1;
     
     var _dir = point_direction(x, y, pontox, pontoy);
     
-    direction = _dir;
+    hspd = lengthdir_x(spd, _dir);
+    vspd = lengthdir_y(spd, _dir);
     
     if (point_distance(x, y, pontox, pontoy) <= sprite_width/2){
         if (instance_exists(obj_ui_general)){

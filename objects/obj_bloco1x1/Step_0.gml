@@ -1,3 +1,5 @@
+if (global.pause) exit;
+
 depth = -y;
 
 if (!rodou){
@@ -10,7 +12,7 @@ if (instance_exists(conjunto[0])){
     vida_perdida = conjunto[0].vida_perdida;
 }
 
-vida = array_length(conjunto); 
+vida = array_length(conjunto)+global.numwave; 
 
 estados();
 

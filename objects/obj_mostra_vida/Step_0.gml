@@ -1,3 +1,5 @@
+if (global.pause) exit;
+
 estado();
 
 xscale_dano = elastic("xs_dan", xscale_dano, 1);

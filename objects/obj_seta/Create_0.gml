@@ -15,6 +15,8 @@ tipo_bola = noone;
 
 invisible = false;
 
+pod_atira = true;
+
 atira = function(_direction, _qnt)
 {
     var _randx = 0;

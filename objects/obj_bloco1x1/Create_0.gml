@@ -6,7 +6,7 @@ depth = -y;
 
 image_alpha = 1;
 
-arvore = false;
+arvore = 512;
 
 estados = noone;
 
