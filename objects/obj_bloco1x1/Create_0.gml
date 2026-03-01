@@ -14,7 +14,7 @@ cria_part = true;
 
 conjunto     = [];
 cord         = [];
-vida         = 1;
+vida         = 1+global.numwave;
 vida_perdida = 0;
 
 roda = 0;
@@ -54,6 +54,8 @@ cooldown_dano = game_get_speed(gamespeed_fps)*.1;
 vida_predio = noone;
 
 rodou = false;
+
+primeiro = false;
 
 fogo = {
     img_fogo   : false,

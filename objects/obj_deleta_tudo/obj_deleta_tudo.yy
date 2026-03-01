@@ -8,8 +8,8 @@
   "name":"obj_deleta_tudo",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Passivas",
+    "path":"folders/Objects/Passivas.yy",
   },
   "parentObjectId":null,
   "persistent":true,

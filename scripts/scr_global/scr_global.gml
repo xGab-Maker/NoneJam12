@@ -11,6 +11,8 @@ enum PODER {
     NORMAL // Feito
 }
 
+global.waves_qnt = [100, 300, 500, 750, 900];
+
 global.blocos_qnt = 0;
 
 global.progressao = 0;
@@ -30,7 +32,20 @@ global.blocos_quebrados = 0;
 
 global.combus_qnt = 1;
 
+global.numwave = 1;
+
 global.upg = {
+    qnt_col : 4,
+    dmg     : 1,
+    combus  : 1,
+    protect : 1,
+    vel_ati : 1,
+    tiroqnt : 1,
+    velplay : 1,
+    vel_tir : 5
+}
+
+global.upgorigin = {
     qnt_col : 4,
     dmg     : 1,
     combus  : 1,
@@ -48,7 +63,7 @@ global.cores = {
 
 global.money = {
     brain : 500,
-    star  : 100
+    star  : 90    
 }
 
 global.width_map  = 12;

@@ -65,14 +65,14 @@ cria_upgrade = function(_spr, _desc, _title, _money, _preco, _melhora) construct
     h = sprite_get_height(_spr);
 }
 
-up_ricoche = new cria_upgrade(spr_richocete, "Bum bum Guloso hahaha", "[c_yellow]Elasticidade", "brain", [30, 2], [0, 50, 150]);
-up_combus  = new cria_upgrade(spr_combustivel, "Batatao legal kkk", "[c_maroon]Gasolina", "brain", [25, 2], [2, 7, 12]);
-up_dano    = new cria_upgrade(spr_dano, "Faz alguma coisa", "[c_red]Força", "brain", [150], [0, 100]);
-up_protect = new cria_upgrade(spr_protect, "Bum bum Gulosdsds", "[c_blue]Escudo", "brain", [22], [0, 100]);
-up_velatir = new cria_upgrade(spr_rapido_tiro, "Bum bum Gulofsfsso hahaha", "[c_lime]Tiros Rapidos", "brain", [1, 2], [0, 20, 50]);
-up_2projet = new cria_upgrade(spr_2projeteis, "Bum bum Guloso hfsahaha", "[c_fuchsia]Mais projeteis", "brain", [22, 2], [0, 100]);
-up_velplay = new cria_upgrade(spr_vel, "Bum bum Guloso hahahhga", "[c_orange]Propulsores", "brain", [252, 12], [0, 25, 50]);
-up_veltiro = new cria_upgrade(spr_vel_projetel, "Bum bum Gulohhso hahaha", "[c_olive]Rapidez Tiro", "brain", [66, 125], [0, 20, 40]);
+up_ricoche = new cria_upgrade(spr_richocete, "Bolas mais [wave][c_yellow]elasticas[/wave][/c] quicam mais", "[c_yellow]Elasticidade", "brain", [30, 2], [0, 50, 150]);
+up_combus  = new cria_upgrade(spr_combustivel, "Mais [#ce3c2f]combustivel[/c], mais tempo [c_aqua]Online", "[c_maroon]Gasolina", "brain", [25, 2], [2, 7, 12]);
+up_dano    = new cria_upgrade(spr_dano, "Seus disparos ficam mais [#ce3c2f][shake]poderosos", "[#ce3c2f]Força", "brain", [150], [0, 100]);
+up_protect = new cria_upgrade(spr_protect, "Possibilita o uso do escudo [shake][c_aqua]A.N.T.I.R.O.S", "[#4ab2af]Escudo", "brain", [22], [0, 100]);
+up_velatir = new cria_upgrade(spr_rapido_tiro, "Disparos mais [#5cb535]rapidos[/c] como no [#ce3c2f]velho oeste", "[#5cb535]Tiros Rapidos", "brain", [1, 2], [0, 20, 50]);
+up_2projet = new cria_upgrade(spr_2projeteis, "[shake][#ce3c2f]Destruição[/shake][/c] em dobro", "[c_fuchsia]Mais projeteis", "brain", [22], [0, 100]);
+up_velplay = new cria_upgrade(spr_vel, "Propulsores melhorados rumo ao [#4ab2af][wave]infinito[/wave][/c] e além", "[c_orange]Propulsores", "brain", [252, 12], [0, 25, 50]);
+up_veltiro = new cria_upgrade(spr_vel_projetel, "Disparos rapidos não são nada sem [shake][c_yellow]Velocidade", "[c_yellow]Rapidez Tiro", "brain", [66, 125], [0, 20, 40]);
 
 upg = [up_2projet, up_combus, up_dano, up_protect, up_ricoche, up_velatir, up_velplay, up_veltiro];
 
@@ -88,14 +88,14 @@ seta_func = function(_qual, _indice)
     var _melhora = (_pega_melhora/100)+1;
     
     switch (_qual) {
-    	case up_ricoche : global.upg.qnt_col *= _melhora break;
-        case up_combus  : global.upg.combus  *= _melhora break;
-        case up_dano    : global.upg.dmg     *= _melhora break;
-        case up_protect : global.upg.protect *= _melhora break;
-        case up_velatir : global.upg.vel_ati *= _melhora break;
-        case up_2projet : global.upg.tiroqnt *= _melhora break;
-        case up_velplay : global.upg.velplay *= _melhora break;
-        case up_veltiro : global.upg.vel_tir *= _melhora break;
+    	case up_ricoche : global.upg.qnt_col = (_melhora*global.upgorigin.qnt_col) break;
+        case up_combus  : global.upg.combus  = (_melhora*global.upgorigin.combus) break;
+        case up_dano    : global.upg.dmg     = (_melhora*global.upgorigin.dmg) break;
+        case up_protect : global.upg.protect = (_melhora*global.upgorigin.protect) break;
+        case up_velatir : global.upg.vel_ati = (_melhora*global.upgorigin.vel_ati) break;
+        case up_2projet : global.upg.tiroqnt = (_melhora*global.upgorigin.tiroqnt) break;
+        case up_velplay : global.upg.velplay = (_melhora*global.upgorigin.velplay) break;
+        case up_veltiro : global.upg.vel_tir = (_melhora*global.upgorigin.vel_tir) break;
     }
     
     txt_xs = 1;
@@ -207,7 +207,7 @@ mostra_desc = function(_qual)
     
     var _spr_din = spr_din1;
     
-    var _txt_title = string("{0} [/c]- [c_aqua]{1}/{2}", _qual.title, global.quais[atual_mostre]+1, array_length(_qual.melhora));
+    var _txt_title = string("{0} [/c]- {1}/{2}", _qual.title, global.quais[atual_mostre]+1, array_length(_qual.melhora));
     
     var _up_item = global.quais[atual_mostre];
     
@@ -252,13 +252,29 @@ mostra_desc = function(_qual)
     draw_set_color(global.cores.white);
     draw_rectangle(_posx+_margem/2, _posy+_height/5, _posx-_margem/2+_width, _posy+_height/5, false);
     
-    draw_set_alpha(alp_mostra);
-    draw_set_halign(-1);
-    draw_set_valign(-1);
-    draw_set_color(global.cores.black);
-    draw_text_ext_transformed(_posx+_margem, _posy+_height/4+2, _qual.desc, 60, _posx+_width-_margem/2, .3*txt_xs, .3*txt_ys, 0);
-    draw_set_color(global.cores.white);
-    draw_text_ext_transformed(_posx+_margem, _posy+_height/4, _qual.desc, 60, _posx+_width-_margem/2, .3*txt_xs, .3*txt_ys, 0);
+    var _txt_s_desc = scribble(_qual.desc);
+    
+    var _scale_desc = .3;
+    
+    _txt_s_desc.transform(_scale*txt_xs, _scale*txt_ys, 0);
+
+    _txt_s_desc.wrap(_posx+_width+100);
+    _txt_s_desc.line_spacing("80%");
+    _txt_s_desc.starting_format("fnt_louja_s", c_white);
+    _txt_s_desc.shadow(global.cores.black, 1);  
+    _txt_s_desc.blend(global.cores.white, alp_mostra);
+    
+    _txt_s_desc.align(1, 1);  
+    
+    _txt_s_desc.draw(_posx+_margem+100, _posy+_height/4+25);
+    
+    //draw_set_alpha(alp_mostra);
+    //draw_set_halign(-1);
+    //draw_set_valign(-1);
+    //draw_set_color(global.cores.black);
+    //draw_text_ext_transformed(_posx+_margem, _posy+_height/4+2, _qual.desc, 60, _posx+_width+70, .3*txt_xs, .3*txt_ys, 0);
+    //draw_set_color(global.cores.white);
+    //draw_text_ext_transformed(_posx+_margem, _posy+_height/4, _qual.desc, 60, _posx+_width+70, .3*txt_xs, .3*txt_ys, 0);
     
     draw_set_alpha(1);
     draw_set_color(global.cores.black);
@@ -348,9 +364,9 @@ desenha_louja = function()
         var _who = upg[i];
         
         if (atual == i){
-            _who.al_selec = lerp(_who.al_selec, 1, .6);
+            _who.al_selec = lerp(_who.al_selec, 1, .4);
         }else{
-            _who.al_selec = lerp(_who.al_selec, 0, .6);
+            _who.al_selec = lerp(_who.al_selec, 0, .4);
         }
         
         var _xi = i mod _qnt_quebra;
@@ -387,8 +403,8 @@ desenha_louja = function()
         reseta_vars(i);
     }    
     
-    var _x1 = 41+sprite_get_width(spr_din1)/2;
-    var _y1 = 304+sprite_get_height(spr_din1)/2;
+    var _x1 = 43+sprite_get_width(spr_din1)/2;
+    var _y1 = 305+sprite_get_height(spr_din1)/2;
     
     draw_set_halign(-1);
     draw_set_valign(1);
@@ -398,9 +414,9 @@ desenha_louja = function()
     
     draw_sprite_ext(spr_din1, 0, _x1, _y1, 1, 1, 0, c_white, 1);
     draw_set_color(global.cores.black);
-    draw_text_transformed(_x1+sprite_get_width(spr_din2)/2+10, _y1+2, string(_brain_money), .3*din_xs[0], .3*din_ys[0], 0);
+    draw_text_transformed(_x1+sprite_get_width(spr_din2)/2+10, _y1+1, string(_brain_money), .3*din_xs[0], .3*din_ys[0], 0);
     draw_set_color(global.cores.white);
-    draw_text_transformed(_x1+sprite_get_width(spr_din2)/2+10, _y1, string(_brain_money), .3*din_xs[0], .3*din_ys[0], 0);
+    draw_text_transformed(_x1+sprite_get_width(spr_din2)/2+10, _y1-1, string(_brain_money), .3*din_xs[0], .3*din_ys[0], 0);
     
     draw_set_valign(-1);
     draw_set_halign(-1);

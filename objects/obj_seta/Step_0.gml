@@ -59,8 +59,8 @@ if (mouse_check_button(mb_left) and !global.entra_other){
 switch (tipo_bola) {
     case PODER.NORMAL: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.4 break;
     case PODER.FOGO: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.7 break;
-    case PODER.FRAG: cooldown_atira_ref = game_get_speed(gamespeed_fps) break;
-    case PODER.LASER: cooldown_atira_ref = game_get_speed(gamespeed_fps) break;
+    case PODER.FRAG: cooldown_atira_ref = game_get_speed(gamespeed_fps)*1.5 break;
+    case PODER.LASER: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.8 break;
     case PODER.MULTI: cooldown_atira_ref = game_get_speed(gamespeed_fps)*2 break;
     case PODER.PERF: cooldown_atira_ref = game_get_speed(gamespeed_fps)*.5 break;
 }

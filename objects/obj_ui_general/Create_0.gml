@@ -19,7 +19,7 @@ bar_prog = {
     
     ys_prog : 1,
     
-    star_need : 1000,
+    star_need : global.waves_qnt[global.numwave],
     addy_star : 0,
 }
 
@@ -37,6 +37,8 @@ retarda_barra_tras = function()
 
 desenha_bar_prog = function()
 {
+    bar_prog.star_need = global.waves_qnt[global.numwave];
+    
     global.progressao = global.money.star/bar_prog.star_need;
     
     bar_prog.prog = global.progressao;
@@ -79,15 +81,24 @@ desenha_bar_prog = function()
     draw_set_valign(1);
     draw_set_font(fnt_louja);
     draw_set_color(global.cores.black);
-    draw_text_transformed(_starx+17, _stary+2+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
+    draw_text_transformed(_starx+16, _stary+2+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
     draw_set_color(global.cores.white);
     draw_text_transformed(_starx+15, _stary+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
     draw_set_font(-1);
     draw_set_valign(-1);
     draw_set_halign(-1);
+    
+    if (global.money.star >= bar_prog.star_need){
+        global.numwave++;
+        
+        global.numwave = clamp(global.numwave, 0, array_length(global.waves_qnt)-1);
+    }
+    
+    global.progressao = clamp(global.progressao, 0, 1);
 }
 
 #endregion
+
 
 
 #region UI Lateral
@@ -216,6 +227,36 @@ bar_combus.h = sprite_get_height(bar_combus.spr);
 bar_combus.obj_xs = (bar_combus.max_xs/bar_combus.w)*bar_combus.qnt;
 
 bar_combus.xs = bar_combus.obj_xs;
+
+wd = {
+    wspr : spr_caveira,
+    wx   : 110,
+    wy   : 144,
+    
+    dspr : spr_explosao,
+    dx   : 44,
+    dy   : 144,
+}
+
+desenha_wd = function()
+{
+    draw_sprite(wd.wspr, 0, wd.wx, wd.wy);
+    draw_sprite(wd.dspr, 0, wd.dx, wd.dy);
+    
+    draw_set_halign(2);
+    draw_set_valign(1);
+    draw_set_color(global.cores.black);
+    draw_text_transformed(wd.wx-10, wd.wy+2, global.numwave, .3, .3, 0);
+    draw_set_color(global.cores.white);
+    draw_text_transformed(wd.wx-10, wd.wy, global.numwave, .3, .3, 0);
+    
+    draw_set_color(global.cores.black);
+    draw_text_transformed(wd.dx-11, wd.dy+2, global.upg.dmg, .3, .3, 0);
+    draw_set_color(global.cores.white);
+    draw_text_transformed(wd.dx-11, wd.dy, global.upg.dmg, .3, .3, 0);
+    draw_set_halign(-1);
+    draw_set_valign(-1);
+}
 
 desenha_combustivel = function()
 {
@@ -414,10 +455,14 @@ desenha_ui_lateral = function()
     mostra_dinheiro();
     
     desenha_combustivel();
+    
+    desenha_wd();
 }
 
 
 #endregion
+
+
 
 #region Gerais
 

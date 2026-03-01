@@ -8,3 +8,4 @@ delete triple;
 delete bar_pred;
 delete money_info;
 delete bar_combus;
+delete wd;

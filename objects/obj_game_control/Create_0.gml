@@ -217,6 +217,8 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
                 _all_blocks[i].tipo = string("{0}{1}", _all_blocks[0], _num_rand);
             }
             
+            _all_blocks[0].primeiro = true;
+            
             if (_blocks == todos_blocos){
                 var _pega1 = irandom(array_length(_all_blocks)-1);
                 
