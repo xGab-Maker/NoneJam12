@@ -13,12 +13,14 @@ qnt = 20;
 
 tipo_bola = noone;
 
+invisible = false;
+
 atira = function(_direction, _qnt)
 {
     var _randx = 0;
     var _randy = 0;
     
-    var _spd = 5;
+    var _spd = global.upg.vel_tir;
     
     switch (tipo_bola) {
     	case PODER.MULTI:
@@ -83,17 +85,35 @@ atira = function(_direction, _qnt)
         break;
         
         default:
-            var _tiro = instance_create_layer(pai.x+lengthdir_x(_qnt+10, _direction), pai.y+lengthdir_y(_qnt+10, _direction), "Tiros", obj_bola);
-        
-            _tiro.hspd = lengthdir_x(_spd, _direction+_randx);
-            _tiro.vspd = lengthdir_y(_spd, _direction+_randy);
-            _tiro.depth = depth+1;
-            _tiro.image_angle = _direction;
-            _tiro.tipo = tipo_bola;
-            _tiro.spd = _spd;
+            var _add_def = 20;
+            var _add_ang_def = _add_def;
             
-            _tiro.xscale = .5;
-            _tiro.yscale = .5;
+            var _ang_at_def = -_add_def/2;    
+        
+            for (var i = 0; i < global.upg.tiroqnt; i++) { 
+                //show_message(string("{0} / {1}", _add_ang_def, _ang_at_def));
+                
+                var _tiro = instance_create_layer(pai.x+lengthdir_x(_qnt+10, _direction), pai.y+lengthdir_y(_qnt+10, _direction), "Tiros", obj_bola);
+        
+                if (global.upg.tiroqnt > 1){
+                    _tiro.hspd = lengthdir_x(_spd, _direction+_randx+_ang_at_def);
+                    _tiro.vspd = lengthdir_y(_spd, _direction+_randy+_ang_at_def);
+                }else{
+                    _tiro.hspd = lengthdir_x(_spd, _direction+_randx);
+                    _tiro.vspd = lengthdir_y(_spd, _direction+_randy);
+                }
+                
+                _tiro.depth = depth+1;
+                _tiro.image_angle = _direction;
+                _tiro.tipo = tipo_bola;
+                _tiro.spd = _spd;
+                
+                _tiro.xscale = .5;
+                _tiro.yscale = .5;
+                
+                _ang_at_def += _add_ang_def;
+            }
+
         
             if (instance_exists(pai)){
                 with (pai) {

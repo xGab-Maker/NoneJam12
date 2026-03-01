@@ -11,28 +11,28 @@ cria_bloco = function(_ind, _cor, _bloco) constructor
     bloco = _bloco;
 }
 
-arv_g0  = new cria_bloco(9, c_white, []);
-arv_g1  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
-arv_g2  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"]]);
-arv_g3  = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
-arv_g4  = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
-arv_g5  = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"]]);
-arv_g6  = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
-arv_g7  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
-arv_g8  = new cria_bloco(9, c_white, [[1, "vert"], [-1, "hori"], [-1, "hori"]]);
-arv_g9  = new cria_bloco(9, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
-arv_g10 = new cria_bloco(9, c_white, [[-1, "hori"], [1, "vert"], [1, "vert"]]);
-arv_g11 = new cria_bloco(9, c_white, [[-1, "vert"], [-1, "hori"], [-1, "hori"]]);
-arv_g12 = new cria_bloco(9, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
-arv_g13 = new cria_bloco(9, c_white, [[1, "vert"], [1, "hori"], [1, "hori"]]);
+arv_g0  = new cria_bloco(525, c_white, []);
+arv_g1  = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+arv_g2  = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"]]);
+arv_g3  = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+arv_g4  = new cria_bloco(525, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
+arv_g5  = new cria_bloco(525, c_white, [[1, "vert"], [1, "vert"]]);
+arv_g6  = new cria_bloco(525, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g7  = new cria_bloco(525, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
+arv_g8  = new cria_bloco(525, c_white, [[1, "vert"], [-1, "hori"], [-1, "hori"]]);
+arv_g9  = new cria_bloco(525, c_white, [[-1, "vert"], [1, "hori"], [1, "hori"]]);
+arv_g10 = new cria_bloco(525, c_white, [[-1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g11 = new cria_bloco(525, c_white, [[-1, "vert"], [-1, "hori"], [-1, "hori"]]);
+arv_g12 = new cria_bloco(525, c_white, [[1, "hori"], [1, "vert"], [1, "vert"]]);
+arv_g13 = new cria_bloco(525, c_white, [[1, "vert"], [1, "hori"], [1, "hori"]]);
 
 array_arvs = [arv_g0, arv_g1, arv_g2, arv_g3, arv_g4, arv_g5, arv_g6, arv_g7, arv_g8, arv_g9, arv_g10, arv_g11, arv_g12, arv_g13];
 
-rua1 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
-rua2 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"]]);
-rua3 = new cria_bloco(9, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
-rua4 = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
-rua5 = new cria_bloco(9, c_white, [[1, "vert"], [1, "vert"]]);
+rua1 = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+rua2 = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"]]);
+rua3 = new cria_bloco(525, c_white, [[1, "hori"], [1, "hori"], [1, "hori"]]);
+rua4 = new cria_bloco(525, c_white, [[1, "vert"], [1, "vert"], [1, "vert"]]);
+rua5 = new cria_bloco(525, c_white, [[1, "vert"], [1, "vert"]]);
 
 
 
@@ -237,6 +237,35 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
     }
 }
 
-repeat (5) {
-	checa_livres(array_ruas, obj_rua);
+if (!global.first_time){
+    repeat (5) {
+    	checa_livres(array_ruas, obj_rua);
+    }
+    
+    global.first_time = true;
+}else{
+    for (var i = 0; i < array_length(global.mapa); i++) {
+    	for (var j = 0; j < array_length(global.mapa[i]); j++) {
+        	if (global.mapa[i][j] == 525){
+                instance_create_layer(inix+j*32, iniy+i*32, "Instances", obj_rua);
+            }
+        }
+    }
+    
+    instance_destroy(obj_player);
+    instance_destroy(obj_seta);
+    
+    var _inst = instance_create_layer(global.last_pos.px, -100, "Instances", obj_player);
+    
+    with (_inst) {
+    	estado = estado_cai;
+        
+        indicex = global.last_pos.gridpx;
+        indicey = global.last_pos.gridpy;
+        
+        sobe = global.last_pos.sobep;
+        
+        sombrax = global.last_pos.px;
+        sombray = global.last_pos.py;
+    }
 }

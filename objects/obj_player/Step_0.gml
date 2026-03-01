@@ -1,13 +1,11 @@
-depth = -y;
+
 
 inputs();
-move();
+
+estado();
 
 iniy = margemx*margem_multiy;
 inix = 95+margemy*margem_multix;
-
-x = lerp(x, inix+indicex*margemx, .15);
-y = lerp(y, iniy+indicey*margemy, .15);
 
 xscale = elastic("xs", xscale, nxscale, , .3);
 yscale = elastic("ys", yscale, nyscale, , .3);
@@ -19,4 +17,8 @@ if (instance_exists(obj_seta)){
     	paix = obj_player.x;
     	paiy = obj_player.y;
     }
+}
+
+if (keyboard_check_pressed(ord("Y"))){
+    estado = estado_sobe;
 }

@@ -13,13 +13,13 @@ angle  = 0;
 
 colidi = 0;
 
-lim_colide = 6;
+lim_colide = global.upg.qnt_col;
 
 entrou = false;
 
 last_col = noone;
 
-dano = 1;
+dano = global.upg.dmg;
 
 xscale_obj = 1;
 yscale_obj = 1;
@@ -36,8 +36,9 @@ cria_mini_bolas = function(_direction, _spd)
     _tiro.vspd = lengthdir_y(_spd, _direction);
     _tiro.depth = depth-1;
     _tiro.image_angle = _direction;
-    _tiro.lim_colide = 3;
+    _tiro.lim_colide = round(lim_colide/2);
     _tiro.image_blend = image_blend;
+    _tiro.dano = 1;
     
     _tiro.xscale_obj = .8;
     _tiro.yscale_obj = .8;

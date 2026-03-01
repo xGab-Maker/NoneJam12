@@ -18,6 +18,9 @@ bar_prog = {
     xs_prog_ret : 0,
     
     ys_prog : 1,
+    
+    star_need : 1000,
+    addy_star : 0,
 }
 
 var _width = sprite_get_width(bar_prog.borda);
@@ -34,6 +37,8 @@ retarda_barra_tras = function()
 
 desenha_bar_prog = function()
 {
+    global.progressao = global.money.star/bar_prog.star_need;
+    
     bar_prog.prog = global.progressao;
     
     var _offy_fundo = 7;
@@ -62,6 +67,24 @@ desenha_bar_prog = function()
     draw_sprite_ext(bar_prog.borda, 0, _x_bar, _y_bar, bar_prog.xs, bar_prog.ys, bar_prog.ang, c_white, bar_prog.alp);
     
     retarda_barra_tras();
+    
+    var _starx = _x_bar+_width_fund/2+sprite_get_width(spr_din2)/1.5;
+    var _stary = _y_bar;
+    
+    draw_sprite_ext(spr_din2, 0, _starx, _stary+bar_prog.addy_star/2, 1, 1, 0, c_white, 1);
+    
+    bar_prog.addy_star = sine_between(current_time/1000, 6, -1, 1);
+    
+    draw_set_halign(-1);
+    draw_set_valign(1);
+    draw_set_font(fnt_louja);
+    draw_set_color(global.cores.black);
+    draw_text_transformed(_starx+17, _stary+2+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
+    draw_set_color(global.cores.white);
+    draw_text_transformed(_starx+15, _stary+bar_prog.addy_star, bar_prog.star_need, .3, .3, 0);
+    draw_set_font(-1);
+    draw_set_valign(-1);
+    draw_set_halign(-1);
 }
 
 #endregion
@@ -164,6 +187,56 @@ money_info = {
     txt_ys : [1, 1],
     
     qnts : [global.money.brain, global.money.star]
+}
+
+bar_combus = {
+    spr : spr_comb_bar,
+    
+    x : 15,
+    y : 117,
+    
+    xs     : 1,
+    obj_xs : 1,
+    ys     : 1,
+    
+    max_xs : 100,
+    
+    sc_xs : 1,
+    sc_ys : 1,
+    
+    qnt : global.combus_qnt,
+    
+    w : 0,
+    h : 0
+}
+
+bar_combus.w = sprite_get_width(bar_combus.spr);
+bar_combus.h = sprite_get_height(bar_combus.spr);
+
+bar_combus.obj_xs = (bar_combus.max_xs/bar_combus.w)*bar_combus.qnt;
+
+bar_combus.xs = bar_combus.obj_xs;
+
+desenha_combustivel = function()
+{
+    bar_combus.qnt = global.combus_qnt;
+    
+    bar_combus.obj_xs = (bar_combus.max_xs/bar_combus.w)*bar_combus.qnt;
+    
+    shader_set(sh_multi_color);
+    draw_sprite_ext(bar_combus.spr, 0, bar_combus.x, bar_combus.y, bar_combus.obj_xs*bar_combus.sc_xs, bar_combus.ys*bar_combus.sc_ys, 0, c_white, 1);
+    shader_reset();
+    
+    draw_sprite_ext(bar_combus.spr, 0, bar_combus.x, bar_combus.y, bar_combus.xs*bar_combus.sc_xs, bar_combus.ys*bar_combus.sc_ys, 0, c_white, 1);
+    
+    bar_combus.xs = lerp(bar_combus.xs, bar_combus.obj_xs, .1);
+    
+    bar_combus.sc_xs = elastic("bar_combusscsx", bar_combus.sc_xs, 1, , .2);
+    bar_combus.sc_ys = elastic("bar_combusscsy", bar_combus.sc_ys, 1, , .2);    
+    
+    draw_sprite(spr_fundo_comb, 0, 63, 118);
+    
+    global.combus_qnt = clamp(global.combus_qnt, 0, 1);
 }
 
 slider_txts = function()
@@ -339,6 +412,8 @@ desenha_ui_lateral = function()
     barra_predios();
     
     mostra_dinheiro();
+    
+    desenha_combustivel();
 }
 
 

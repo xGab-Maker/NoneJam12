@@ -52,7 +52,7 @@ if (mouse_check_button(mb_left) and !global.entra_other){
     if (cooldown_atira <= 0){
         atira(_dir, qnt);
         
-        cooldown_atira = cooldown_atira_ref;
+        cooldown_atira = cooldown_atira_ref/global.upg.vel_ati;
     }
 }
 
@@ -70,7 +70,7 @@ yscale = elastic("ys", yscale, 1);
 
 qnt = lerp(qnt, 20, .15);
 
-if (tipo_bola == PODER.LASER){
+if (tipo_bola == PODER.LASER or invisible){
     image_alpha = lerp(image_alpha, 0, .15);
 }else{
     image_alpha = lerp(image_alpha, 1, .15);

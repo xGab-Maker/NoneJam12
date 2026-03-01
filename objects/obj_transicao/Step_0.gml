@@ -1,5 +1,3 @@
-depth = -9999999;
-
 if (room != local){
     alpha += .05;
     

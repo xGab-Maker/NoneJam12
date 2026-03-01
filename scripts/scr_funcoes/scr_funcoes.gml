@@ -1,11 +1,13 @@
 
-function cria_particula(_sprite, _x, _y, _depth, _pedra = false, _tipo = noone)
+function cria_particula(_sprite, _x, _y, _depth, _pedra = false, _tipo = noone, _sem_fumaca = false)
 {
-    var _part = instance_create_depth(_x, _y, _depth, obj_part);
-    
-    _part.sprite_index = _sprite;
-    _part.tipo = _tipo;
-    
+    if (!_sem_fumaca){
+        var _part = instance_create_depth(_x, _y, _depth, obj_part);
+        
+        _part.sprite_index = _sprite;
+        _part.tipo = _tipo;
+    }
+        
     if (_pedra){
         var _pedra_part = instance_create_depth(_x, _y, _depth, obj_part_pedra);
         
@@ -113,7 +115,7 @@ function add_prog_p(_porc)
         }
     }
     
-    if (!_sai) game_end();
+    if (!_sai) exit;
     
     var _add = _porc/100;
     
