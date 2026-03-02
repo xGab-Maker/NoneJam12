@@ -28,89 +28,12 @@ if (al_draw >= .5){
     draw_set_color(global.cores.white);
     
     draw_set_color(global.cores.black);
-    draw_text_transformed(room_width/2, room_height/2+2, "Tentar Novamente", .3*tent_xs, .3*tent_ys, tent_an);
+    draw_text_transformed(room_width/2, room_height/2+2, "Sair do Jogo", .3*sai_xs, .3*sai_ys, sai_an);
     draw_set_color(global.cores.white);
-    draw_text_transformed(room_width/2, room_height/2, "Tentar Novamente", .3*tent_xs, .3*tent_ys, tent_an);
+    draw_text_transformed(room_width/2, room_height/2, "Sair do Jogo", .3*sai_xs, .3*sai_ys, sai_an);
     
     if (alp_txts >= .9){
-        if (point_in_rectangle(mouse_x, mouse_y, room_width/2-(string_width("Tentar Novamente")*.3)/2, room_height/2-(string_height("Tentar Novamente")*.3)/2, room_width/2+(string_width("Tentar Novamente")*.3)/2, room_height/2+(string_height("Tentar Novamente")*.3)/2)){
-            if (atual != 0){
-                tent_xs = 1.3;
-                tent_ys = .8;
-                
-                tent_an = random_range(-10, 10);
-            }
-            
-            if (mouse_check_button(mb_left)){
-                tent_nxs = .9;
-                tent_nys = .9;
-            }
-            
-            if (mouse_check_button_pressed(mb_left)){
-                tent_nxs = 1;
-                tent_nys = 1;
-                
-                tent_an = random_range(-20, 20);
-                
-                transciona(rm_menu, 0);
-                
-                global.mapa = [];
-
-                global.mapa = array_create(global.height_map, []);
-                
-                for (var i = 0; i < global.height_map; i++) {
-                    global.mapa[i] = array_create(global.width_map, 0);
-                }
-                
-                global.quais = array_create(8, 0);
-                
-                global.upg = {
-                    qnt_col : 4,
-                    dmg     : 1,
-                    combus  : 1,
-                    protect : 1,
-                    vel_ati : 1,
-                    tiroqnt : 1,
-                    velplay : 1,
-                    vel_tir : 5
-                }
-                
-                global.last_pos = {
-                    py : 324,
-                    px : 0,
-                    gridpx : 0,
-                    gridpy : 0,
-                    sobep  : 0
-                }
-                
-                global.numwave = 0;
-                
-                global.combus_qnt = 1;
-                
-                global.money = {
-                    brain : 0,
-                    star  : 0    
-                }
-            }
-            
-            atual = 0;
-        }else{
-            if (atual == 0){
-                atual = -1;
-                
-                tent_nxs = 1;
-                tent_nys = 1;
-            }
-        }
-    }
-    
-    draw_set_color(global.cores.black);
-    draw_text_transformed(room_width/2, room_height/2+48, "Sair do Jogo", .3*sai_xs, .3*sai_ys, sai_an);
-    draw_set_color(global.cores.white);
-    draw_text_transformed(room_width/2, room_height/2+50, "Sair do Jogo", .3*sai_xs, .3*sai_ys, sai_an);
-    
-    if (alp_txts >= .9){
-        if (point_in_rectangle(mouse_x, mouse_y, room_width/2-(string_width("Sair do Jogo")*.3)/2, room_height/2+50-(string_height("Sair do Jogo")*.3)/2, room_width/2+(string_width("Sair do Jogo")*.3)/2, room_height/2+50+(string_height("Sair do Jogo")*.3)/2)){
+        if (point_in_rectangle(mouse_x, mouse_y, room_width/2-(string_width("Sair do Jogo")*.3)/2, room_height/2-(string_height("Sair do Jogo")*.3)/2, room_width/2+(string_width("Sair do Jogo")*.3)/2, room_height/2+(string_height("Sair do Jogo")*.3)/2)){
             if (atual != 1){
                 sai_xs = 1.3;
                 sai_ys = .8;
