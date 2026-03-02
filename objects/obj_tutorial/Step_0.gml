@@ -96,7 +96,7 @@ switch (part_tutorial) {
     case 7:
         global.para_sobe = true;
     
-        escrita = "Com isso explicado não deixe a Cidade LOTAR\nNem seu Combustivel ACABAR\n(Ass. Base de Comando)\n(Clique ENTER para prosseguir)";
+        escrita = "Com isso dito não seu Combustivel ACABAR\n(Ass. Base de Comando)\n(Clique ENTER para prosseguir)";
     
         if (keyboard_check_pressed(vk_enter) and !passa){
             true_pass();

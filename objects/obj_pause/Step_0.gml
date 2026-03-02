@@ -1,8 +1,11 @@
 if (room != rm_menu){
-    if (keyboard_check_pressed(vk_escape)) global.pause = !global.pause;
+    if (keyboard_check_pressed(vk_escape)){
+        global.pause = !global.pause;
+        pause = global.pause;
+    }
 }
 
-if (global.pause){
+if (global.pause and pause){
     al_1 = lerp(al_1, .5, .15);
     
     if (al_1 >= .45){
