@@ -21,10 +21,19 @@ if (instance_exists(obj_seta)){
     }
 }
 
-if (keyboard_check_pressed(ord("Y"))){
-    estado = estado_sobe;
+if (global.upg.protect > 1 and !instance_exists(obj_bolha) and bolhado == noone){
+    cooldown_bolhado--;
+    cooldown_bolhado = clamp(cooldown_bolhado, 0, infinity);
+    
+    if (cooldown_bolhado <= 0){
+        bolhado = instance_create_depth(x, y, depth-1, obj_bolha);
+
+        cooldown_bolhado = game_get_speed(gamespeed_fps)*10;
+    }
 }
 
 if (global.combus_qnt <= 0){
-    game_end();
+    if (!instance_exists(obj_tela_mortifera)){
+        instance_create_layer(0, 0, "Passivas", obj_tela_mortifera);
+    }
 }

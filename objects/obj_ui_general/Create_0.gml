@@ -23,6 +23,9 @@ bar_prog = {
     addy_star : 0,
 }
 
+bixaum_anim = 0;
+cont_frame  = 0;
+
 var _width = sprite_get_width(bar_prog.borda);
 var _width_prog = sprite_get_width(bar_prog.cont);
 
@@ -277,6 +280,18 @@ desenha_wd = function()
     draw_text_transformed(wd.wx-10*wd.wxs, wd.wy, global.numwave+1, .3*wd.wxs, .3*wd.wys, 0);
     
     if (wd.anim){
+        if (global.numwave == array_length(global.waves_qnt)-1){
+            if (!instance_exists(obj_tela_mortifera)){
+                var _tela = instance_create_layer(0, 0, "Passivas", obj_tela_mortifera);
+                
+                _tela.texto_grande = "Você Eliminou Toda a Cidade\nParabéns!!";
+            }
+            
+            wd.anim = false;
+            
+            exit;
+        }
+        
         global.pause = true;
         
         wd.qualp = lerp(wd.qualp, .5, .15);
@@ -315,11 +330,15 @@ desenha_wd = function()
                 wd.anim = false;
                 
                 global.numwave++;
+
+                play_sound(snd_hit, .5, 1);
                 
                 if (instance_exists(obj_player)){
                     obj_player.estado = obj_player.estado_sobe;
                     obj_player.alp_branco = 1;
                 }
+                
+                global.pause = false;
         
                 global.numwave = clamp(global.numwave, 0, array_length(global.waves_qnt)-1);
                 
@@ -328,8 +347,6 @@ desenha_wd = function()
             }
         }
     }else{
-        global.pause = false;
-        
         with (obj_dinheiro1) {
             off_depth = false;
         }
@@ -370,9 +387,21 @@ desenha_combustivel = function()
     
     draw_sprite(spr_fundo_comb, 0, 63, 118);
     
-    global.combus_qnt -= .0001;
-    
-    global.combus_qnt = clamp(global.combus_qnt, 0, 1);
+    if (global.pause == false){
+        var _segue = true;    
+        
+        if (instance_exists(obj_player)){
+            if (obj_player.estado != obj_player.estado_move){
+                _segue = false;
+            }
+        }
+        
+        if (_segue){
+            global.combus_qnt -= (.00035/global.upg.combus);
+            
+            global.combus_qnt = clamp(global.combus_qnt, 0, 1);
+        }
+    }
 }
 
 slider_txts = function()
@@ -445,7 +474,7 @@ barra_predios = function()
     bar_pred.sc_ys = elastic("bar_predscsy", bar_pred.sc_ys, 1, , .2);
     
     if (!global.para_sobe){
-        add_prog_p(global.add_bar_pred+(global.blocos_quebrados/500));
+        add_prog_p(global.add_bar_pred+(global.numwave/100));
     }else{
         global.progress_pred -= .1;
         global.progress_pred = clamp(global.progress_pred, 0, 1);
@@ -529,18 +558,22 @@ desenha_ui_lateral = function()
         lat.let_eady = lerp(lat.let_eady, 0, .15);
     }
     
-    var _offy = sprite_get_height(spr_botao_e)/2.3;
-    var _offx = sprite_get_width(spr_botao_e)/1.5;
+    //var _offy = sprite_get_height(spr_botao_e)/2.3;
+    //var _offx = sprite_get_width(spr_botao_e)/1.5;
+    //
+    //draw_sprite_ext(spr_botao_e, 0, _x_up-_offx, (_y_up-_offy)+lat.let_eady, lat.let_exs, lat.let_eys, 0, c_white, lat.let_eal);
     
-    draw_sprite_ext(spr_botao_e, 0, _x_up-_offx, (_y_up-_offy)+lat.let_eady, lat.let_exs, lat.let_eys, 0, c_white, lat.let_eal);
+    var _normal = noone;
     
-    if (keyboard_check_pressed(vk_enter)){
-        if (lat.up_at == noone){
-            lat.up_at = lat.all_up[irandom(array_length(lat.all_up)-1)];
-        }else{
-            lat.up_at = noone;
-        }
+    switch (global.poder_atual) {
+    	case PODER.FOGO  : _normal = fogo break;
+    	case PODER.LASER : _normal = laser break;
+    	case PODER.PERF  : _normal = perfura break;
+    	case PODER.FRAG  : _normal = explode break;
+    	case PODER.MULTI : _normal = triple break;
     }
+    
+    lat.up_at = _normal;
     
     if (instance_exists(obj_seta)){
         if (lat.up_at != noone){
@@ -555,6 +588,18 @@ desenha_ui_lateral = function()
     mostra_dinheiro();
     
     desenha_combustivel();
+    
+    if (!global.pause) cont_frame++;
+    
+    if (cont_frame >= 15){
+        bixaum_anim++;
+        
+        cont_frame = 0;
+        
+        if (bixaum_anim > sprite_get_number(spr_bixaum)) bixaum_anim = 0;
+    }
+    
+    draw_sprite(spr_bixaum, bixaum_anim, 66, 95);
     
     desenha_wd();
 }

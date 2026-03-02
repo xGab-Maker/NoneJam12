@@ -1,3 +1,7 @@
+depth = -9999;
+
+audio_stop_all();
+
 local = noone;
 
 alpha = 0;
@@ -6,13 +10,13 @@ indini  = 0;
 indprox = 0;
 
 planeta1 = {
-    spr : spr_planeta1,
+    spr : spr_terra,
     x   : room_width/2-120,
     y   : room_height/2+20,
 }
 
 planeta2 = {
-    spr : spr_planeta2,
+    spr : spr_planeta_insane,
     x   : room_width/2+80,
     y   : room_height/2-80,
 }

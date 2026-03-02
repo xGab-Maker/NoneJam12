@@ -1,3 +1,5 @@
+play_sound(snd_shoot_heli, .7, 1.4, false);
+
 spd  = 0;
 hspd = 0;
 vspd = 0;

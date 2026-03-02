@@ -71,6 +71,7 @@ fogo = {
 fogo.cooldown_end_fogoso = game_get_speed(gamespeed_fps)*fogo.temp_fogo;
 
 
+toca_som_ini = false;
 
 da_fogo = function()
 {
@@ -294,6 +295,12 @@ aumenta_scale = function()
     
     if (_find != -1){
         if (_find == 0){
+            if (toca_som_ini == false){
+                play_sound(snd_sobe_predio, 1.5, .5, false);
+                
+                toca_som_ini = true
+            }
+            
             yscale = lerp(yscale, 1, .2);
             xscale = lerp(xscale, 1, .2);
             
@@ -317,6 +324,12 @@ aumenta_scale = function()
                         screen_shake(1);
                         
                         shake = true;
+                    }
+                    
+                    if (toca_som_ini == false){
+                        play_sound(snd_sobe_predio, 1.5, .5, false);
+                        
+                        toca_som_ini = true
                     }
                     
                     xscale = lerp(xscale, 1, .15); 

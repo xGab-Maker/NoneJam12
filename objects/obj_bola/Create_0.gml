@@ -1,3 +1,5 @@
+play_sound(snd_tiro, 1.2, .8);
+
 screen_shake(1);
 
 tipo = PODER.NORMAL;

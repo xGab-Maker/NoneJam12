@@ -1,1 +1,0 @@
-global.money.star++;

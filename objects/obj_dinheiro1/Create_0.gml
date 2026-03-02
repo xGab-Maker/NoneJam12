@@ -48,6 +48,8 @@ estado_segue = function()
             }
         }
         
+        play_sound(snd_moeda, 1.7, .8, false);
+        
         instance_destroy(self);
     }
 }

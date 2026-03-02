@@ -4,6 +4,8 @@ instance_destroy(other);
 
 vida_perd++;
 
+play_sound(snd_hit, .7, 1.4, false);
+
 xscale = 1.4;
 yscale = .6;
 

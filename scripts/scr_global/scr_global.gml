@@ -13,11 +13,13 @@ enum PODER {
 
 global.para_sobe = false;
 
-global.waves_qnt = [100, 300, 500, 750, 900, 1500, 2000, 3500, 4250, 5000];
+global.waves_qnt = [50, 300, 800, 1500, 2000, 3000, 9000, 16000, 25000, 40000, 70000, 100000];
 
 global.blocos_qnt = 0;
 
 global.progressao = 0;
+
+global.poder_atual = PODER.NORMAL;
 
 global.bar_comb = 0;
 global.add_bar_comb = 0;
@@ -26,7 +28,7 @@ global.pisca_des = false;
 
 global.entra_other = false;
 
-global.add_bar_pred = .5;
+global.add_bar_pred = 1;
 
 global.progress_pred = 0;
 
@@ -59,13 +61,18 @@ global.upgorigin = {
 }
 
 global.cores = {
-    black : #141527,
-    white : #F7FFFD
+    black  : #141527,
+    white  : #F7FFFD,
+    red    : #CE3C2F,
+    yellow : #FEC659,
+    green  : #56C42D,
+    blue   : #41689E,
+    gray   : #758989
 }
 
 global.money = {
-    brain : 500,
-    star  : 90    
+    brain : 0,
+    star  : 0    
 }
 
 global.width_map  = 12;

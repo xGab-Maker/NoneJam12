@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"snd_sobe_predio",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.26820862,
+  "name":"snd_sobe_predio",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"snd_sobe_predio.wav",
+  "type":0,
+  "volume":0.3,
+}

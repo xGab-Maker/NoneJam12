@@ -1,5 +1,7 @@
 depth = -9999;
 
+image_alpha = 0;
+
 randomize();
 
 sprite_index = choose(spr_heli_amarelo, spr_heli_vermleho);
@@ -37,7 +39,7 @@ cai_pont = 0;
 suba = false;
 
 cooldown_muda  = game_get_speed(gamespeed_fps);
-cooldown_atira = game_get_speed(gamespeed_fps)*.5;
+cooldown_atira = game_get_speed(gamespeed_fps)*2;
 
 anda = function()
 {
@@ -97,8 +99,8 @@ atira = function()
                         	spd = 1.5;
                             dir = _dir+_rand;
                             image_angle = dir+90;
-                            image_xscale = 1.2;
-                            image_yscale = .8;
+                            image_xscale = 1;
+                            image_yscale = 1;
                         }
                         
                         cooldown_atira = game_get_speed(gamespeed_fps)*.8;

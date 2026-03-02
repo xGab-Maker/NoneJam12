@@ -2,6 +2,10 @@ estado = noone;
 
 vspd = 0;
 
+bolhado = noone;
+
+cooldown_bolhado = game_get_speed(gamespeed_fps)*10;
+
 indicex = round((array_length(global.mapa[0])-1)/2);
 indicey = array_length(global.mapa)-1;
 
@@ -219,6 +223,8 @@ estado_sobe = function()
             
             screen_shake(5);
             
+            play_sound(snd_hit, .9, .4, false);
+            
             pisca(1, c_yellow);
             
             shakeado = true;
@@ -231,6 +237,9 @@ estado_sobe = function()
         
         y += vspd;
     }else{
+        nxscale = 1;
+        nyscale = 1;
+        
         x = lerp(x, inix+indicex*margemx, .15);
         y = lerp(y, iniy+indicey*margemy, .15);
         
@@ -270,6 +279,8 @@ estado_cai = function()
     
     if (y >= global.last_pos.py){
         estado = estado_move;
+        
+        play_sound(snd_hit, .9, .4, false);
         
         xscale = 1.5;
         yscale = .5;

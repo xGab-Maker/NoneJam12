@@ -1,3 +1,5 @@
+play_music(msc_game);
+
 randomize();
 
 #region Cria Blocos
@@ -160,7 +162,11 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
         }
     }
     
-    if (!_sai) exit;
+    if (!_sai){
+        if (!instance_exists(obj_tela_mortifera)) instance_create_layer(0, 0, "Passivas", obj_tela_mortifera);
+        
+        exit;   
+    }
     
     var _rand = -1;
     
@@ -196,6 +202,14 @@ checa_livres = function(_blocks = todos_blocos, _obj = obj_bloco1x1)
                 var _addy = _return[i][1]*height_block;
                 
                 var _block = 0;
+                
+                if (i == 0 and global.numwave >= 2 and instance_number(obj_helicoptero) < ceil(global.numwave/2)){
+                    var _random = random(100);
+                    
+                    if (_random >= 95 and _obj == obj_bloco1x1){
+                        instance_create_layer(inix+_addx, iniy+_addy-sprite_get_height(spr_heli_amarelo), "Instances", obj_helicoptero);
+                    }
+                }
                 
                 if (_blocks == todos_blocos){
                     _block = instance_create_layer(inix+_addx, iniy+_addy, "Instances", _obj);
@@ -256,6 +270,7 @@ if (!global.first_time){
     
     instance_destroy(obj_player);
     instance_destroy(obj_seta);
+    instance_destroy(obj_tutorial);
     
     var _inst = instance_create_layer(global.last_pos.px, -100, "Instances", obj_player);
     

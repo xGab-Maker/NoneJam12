@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"msc_louja",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":169.94496,
+  "name":"msc_louja",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"msc_louja.mp3",
+  "type":0,
+  "volume":0.5,
+}

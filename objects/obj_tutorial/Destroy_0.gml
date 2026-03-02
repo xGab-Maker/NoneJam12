@@ -1,0 +1,1 @@
+global.para_sobe = false;

@@ -10,7 +10,7 @@ if (cooldown_morre > 0){
         var _dir = point_direction(x, y, obj_player.x, obj_player.y);
         var _diff = angle_difference(_dir, image_angle);
         
-        image_angle += _diff*.2;
+        image_angle += _diff*.05;
         
         hspd = lengthdir_x(spd, image_angle);
         vspd = lengthdir_y(spd, image_angle);

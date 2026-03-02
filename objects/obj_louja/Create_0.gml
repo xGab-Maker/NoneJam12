@@ -1,4 +1,12 @@
+play_music(msc_louja);
+
 global.progress_pred = 0;
+
+global.combus_qnt = 1;
+
+var _poder_choose = choose(PODER.FOGO, PODER.FRAG, PODER.LASER, PODER.MULTI, PODER.PERF);
+
+global.poder_atual = _poder_choose;
 
 xini = 90;
 yini = 15;
@@ -65,14 +73,14 @@ cria_upgrade = function(_spr, _desc, _title, _money, _preco, _melhora) construct
     h = sprite_get_height(_spr);
 }
 
-up_ricoche = new cria_upgrade(spr_richocete, "Bolas mais [wave][c_yellow]elasticas[/wave][/c] quicam mais", "[c_yellow]Elasticidade", "brain", [30, 2], [0, 50, 150]);
-up_combus  = new cria_upgrade(spr_combustivel, "Mais [#ce3c2f]combustivel[/c], mais tempo [c_aqua]Online", "[c_maroon]Gasolina", "brain", [25, 2], [2, 7, 12]);
-up_dano    = new cria_upgrade(spr_dano, "Seus disparos ficam mais [#ce3c2f][shake]poderosos", "[#ce3c2f]Força", "brain", [150], [0, 100]);
-up_protect = new cria_upgrade(spr_protect, "Possibilita o uso do escudo [shake][c_aqua]A.N.T.I.R.O.S", "[#4ab2af]Escudo", "brain", [22], [0, 100]);
-up_velatir = new cria_upgrade(spr_rapido_tiro, "Disparos mais [#5cb535]rapidos[/c] como no [#ce3c2f]velho oeste", "[#5cb535]Tiros Rapidos", "brain", [1, 2], [0, 20, 50]);
-up_2projet = new cria_upgrade(spr_2projeteis, "[shake][#ce3c2f]Destruição[/shake][/c] em dobro", "[c_fuchsia]Mais projeteis", "brain", [22], [0, 100]);
-up_velplay = new cria_upgrade(spr_vel, "Propulsores melhorados rumo ao [#4ab2af][wave]infinito[/wave][/c] e além", "[c_orange]Propulsores", "brain", [252, 12], [0, 25, 50]);
-up_veltiro = new cria_upgrade(spr_vel_projetel, "Disparos rapidos não são nada sem [shake][c_yellow]Velocidade", "[c_yellow]Rapidez Tiro", "brain", [66, 125], [0, 20, 40]);
+up_ricoche = new cria_upgrade(spr_richocete, "Bolas mais [wave][c_yellow]elasticas[/wave][/c] quicam mais", "[c_yellow]Elasticidade", "brain", [100, 250, 1000], [0, 50, 150, 400]);
+up_combus  = new cria_upgrade(spr_combustivel, "Mais [#ce3c2f]combustivel[/c], mais tempo [c_aqua]Online", "[c_maroon]Gasolina", "brain", [100, 200, 1000], [0, 50, 100, 200]);
+up_dano    = new cria_upgrade(spr_dano, "Seus disparos ficam mais [#ce3c2f][shake]poderosos", "[#ce3c2f]Força", "brain", [200, 2000], [0, 100, 200]);
+up_protect = new cria_upgrade(spr_protect, "Possibilita o uso do escudo [shake][c_aqua]A.N.T.I.R.O.S", "[#4ab2af]Escudo", "brain", [250], [0, 100]);
+up_velatir = new cria_upgrade(spr_rapido_tiro, "Disparos mais [#5cb535]rapidos[/c] como no [#ce3c2f]velho oeste", "[#5cb535]Tiros Rapidos", "brain", [100, 200, 1500], [0, 20, 50, 150]);
+up_2projet = new cria_upgrade(spr_2projeteis, "[shake][#ce3c2f]Destruição[/shake][/c] em dobro", "[c_fuchsia]Mais projeteis", "brain", [200], [0, 100]);
+up_velplay = new cria_upgrade(spr_vel, "Propulsores melhorados rumo ao [#4ab2af][wave]infinito[/wave][/c] e além", "[c_orange]Propulsores", "brain", [50, 200, 1000], [0, 25, 50, 100]);
+up_veltiro = new cria_upgrade(spr_vel_projetel, "Disparos rapidos não são nada sem [shake][c_yellow]Velocidade", "[c_yellow]Rapidez Tiro", "brain", [100, 250, 1000], [0, 20, 40, 120]);
 
 upg = [up_2projet, up_combus, up_dano, up_protect, up_ricoche, up_velatir, up_velplay, up_veltiro];
 
@@ -124,6 +132,8 @@ seleciona_item = function(_qual, _x, _y, _indice, _qnt_quebra, _real_i)
                 }
             }
             
+            play_sound(snd_selec, .6, 1.1);
+            
             txt_xs_up = .7;
             txt_ys_up = 1.2;
             
@@ -146,6 +156,8 @@ seleciona_item = function(_qual, _x, _y, _indice, _qnt_quebra, _real_i)
         }
         
         if (mouse_check_button_released(mb_left)){
+            play_sound(snd_clica, .6, 1.2);
+            
             upg[_indice].nxs = 1;
             upg[_indice].nys = 1;
             
@@ -447,6 +459,8 @@ desenha_louja = function()
             sai_xs = 1.2;
             sai_ys = .7;
             sai_ang = random_range(-10, 10);
+            
+            play_sound(snd_selec, .9, 1.5);
         }
         
         if (mouse_check_button(mb_left) and !instance_exists(obj_transicao)){
@@ -455,6 +469,8 @@ desenha_louja = function()
         }
         
         if (mouse_check_button_released(mb_left) and !instance_exists(obj_transicao)){
+            play_sound(snd_clica, .9, 1.5);
+            
             sai_nxs = 1;
             sai_nys = 1;
             
@@ -497,4 +513,25 @@ desenha_louja = function()
         din_xs[i] = elastic("din_xs" + string(i), din_xs[i], 1, , .2);
         din_ys[i] = elastic("din_ys" + string(i), din_ys[i], 1, , .2);
     }
+    
+    var _poder = "";
+    
+    switch (global.poder_atual) {
+    	case PODER.FOGO  : _poder = "Bola de fogo" break;
+    	case PODER.FRAG  : _poder = "Bola de Fragmentação" break;
+    	case PODER.LASER : _poder = "Raio Laser" break;
+    	case PODER.MULTI : _poder = "Multiplas Bolas" break;
+    	case PODER.PERF  : _poder = "Bola Fantasma"break;
+    }
+    
+    draw_set_halign(1);
+    draw_set_valign(-1);
+    draw_set_font(fnt_louja);
+    draw_set_color(global.cores.black);
+    draw_text_ext_transformed(room_width/2-10, room_height-58, string("Sua melhoria é: {0}", _poder), 70, 800, .3, .3, 0);
+    draw_set_color(global.cores.white);
+    draw_text_ext_transformed(room_width/2-10, room_height-60, string("Sua melhoria é: {0}", _poder), 70, 800, .3, .3, 0);
+    draw_set_font(-1);
+    draw_set_halign(-1);
+    draw_set_valign(-1);
 }

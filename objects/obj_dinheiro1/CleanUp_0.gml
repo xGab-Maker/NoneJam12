@@ -1,1 +1,1 @@
-global.money.brain++;
+global.money.brain += 10;

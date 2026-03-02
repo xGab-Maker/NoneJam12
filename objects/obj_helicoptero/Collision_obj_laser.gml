@@ -5,6 +5,8 @@ vida_perd++;
 xscale = 1.4;
 yscale = .6;
 
+play_sound(snd_hit, .7, 1.4, false);
+
 al_white = 1;
 
 if (vida_predio == noone){

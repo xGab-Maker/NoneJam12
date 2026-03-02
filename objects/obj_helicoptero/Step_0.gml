@@ -34,3 +34,5 @@ if (vida-vida_perd <= 0){
         }
     }
 }
+
+image_alpha = lerp(image_alpha, 1, .15);

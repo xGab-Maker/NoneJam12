@@ -126,11 +126,15 @@ function add_prog_p(_porc)
     if (global.progress_pred >= 1){
         if (instance_exists(obj_game_control)){
             with (obj_game_control) {
-                repeat (2) {
+                var _chance = random(100);
+                
+                repeat (round(1+(global.numwave/4))) {
                 	checa_livres();
                 }
                 
-                checa_livres(array_arvs, obj_arv_grande);
+                if (_chance > 50){
+                    checa_livres(array_arvs, obj_arv_grande);
+                }
             }
         }
         
@@ -145,19 +149,15 @@ function add_prog_p(_porc)
     }
 }
 
-function pisca(_qnt = 1, _color = c_white, _rainbow = false){
-    if (global.pisca_des == false and instance_number(obj_pisca) < 2){
+function pisca(_qnt = 1, _color = c_white){
+    if (global.piscadas == false and instance_number(obj_pisca) < 2){
         var _pisca =  instance_create_layer(0, 0, "Passivas", obj_pisca);
         
         if (instance_exists(_pisca)){
             with (_pisca) {
             	qnt = _qnt;
                 
-                if (_rainbow == false){
-                    cor = _color;
-                }else{
-                    colorido = true;
-                }
+                cor = _color;
             }
         }
     }
@@ -225,17 +225,22 @@ function transciona(_local, _pla_at)
 } 
 
 
+function play_sound(_snd, _pitch_max = 0, _pitch_min = 0, _loop = false)
+{
+    var _pitch = random_range(_pitch_min, _pitch_max);
+    
+    audio_play_sound(_snd, 1, _loop, 1, , _pitch);
+}
 
 
-
-
-
-
-
-
-
-
-
+function play_music(_snd)
+{
+    if (!audio_is_playing(_snd)){
+        var _sound = audio_play_sound(_snd, 1, true, .05);
+        
+        audio_sound_gain(_sound, 1, 2000);
+    }
+}
 
 
 
